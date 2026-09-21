@@ -1,0 +1,7 @@
+import LittlewoodInverse.DenseMajority
+import LittlewoodInverse.PacketRelations
+
+#print axioms LittlewoodInverse.Majority.dense_mixed_correlations
+#print axioms LittlewoodInverse.PacketEnergy.shifted_relation_integral
+#print axioms LittlewoodInverse.PacketEnergy.exponential_energy_from_relations
+#print axioms LittlewoodInverse.DenseBlocks.label_hereditary_energy

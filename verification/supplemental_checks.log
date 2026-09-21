@@ -1,0 +1,33 @@
+
+'LittlewoodInverse.outer_damping' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.HardyExternal.bounded_holomorphic_radial_boundary,
+ LittlewoodInverse.HardyExternal.schwarz_integral_boundary]
+'LittlewoodInverse.finite_product_nonpositive_support_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.finite_band_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.Majority.dense_mixed_correlations' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.PacketEnergy.shifted_relation_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.PacketEnergy.exponential_energy_from_relations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LittlewoodInverse.DenseBlocks.label_hereditary_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.BackgroundExternal.finiteAlgebraNorm_indicator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LittlewoodInverse.cyclic_coset_normal_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.BackgroundExternal.green_sanders_cyclic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.BackgroundExternal.green_sanders]
+'LittlewoodInverse.cyclic_coset_lift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.signed_indicator_lift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.discreteEvaluation_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.integral_compactSet_norm_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.compact_spectral_hereditary_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.discrete_spectral_hereditary_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.compact_dual_sidon_constant_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.compact_freiman_norm_transport' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.boundary_norm_asymptotic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.dirichlet_l1_asymptotic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.interlacedSet_individual_fibre' depends on axioms: [propext, Classical.choice, Quot.sound]

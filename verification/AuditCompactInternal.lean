@@ -1,0 +1,10 @@
+import LittlewoodInverse.CompactSidon
+import LittlewoodInverse.CompactTransport
+import LittlewoodInverse.IntervalAsymptotic
+import LittlewoodInverse.SidonFibreExamples
+
+#print axioms LittlewoodInverse.compact_dual_sidon_constant_one
+#print axioms LittlewoodInverse.compact_freiman_norm_transport
+#print axioms LittlewoodInverse.boundary_norm_asymptotic
+#print axioms LittlewoodInverse.dirichlet_l1_asymptotic
+#print axioms LittlewoodInverse.interlacedSet_individual_fibre

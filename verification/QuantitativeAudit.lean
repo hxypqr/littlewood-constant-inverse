@@ -1,0 +1,6 @@
+import LittlewoodInverse.QuantitativeTheorem
+
+#check LittlewoodInverse.quantitative_theorem
+#print axioms LittlewoodInverse.quantitative_theorem
+#print axioms LittlewoodInverse.NumericalConstant.tailError_upper
+#print axioms LittlewoodInverse.NumericalConstant.littlewoodCoefficient_gt_sharp_decimal

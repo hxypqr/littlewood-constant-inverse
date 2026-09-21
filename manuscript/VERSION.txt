@@ -1,0 +1,7 @@
+版本：2026-09-06
+状态：常数与结构类逆定理合稿
+28页；c_*>0.2459209；inverse theorem有明确分解/结构类假设，不是无条件的一般逆定理。
+
+原始文件名称：
+littlewood_constants_and_inverse.pdf
+littlewood_constants_and_inverse.tex

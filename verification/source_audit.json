@@ -1,0 +1,13 @@
+{
+  "module_count": 137,
+  "theorem_count": 1219,
+  "public_theorems_for_kernel_audit": 1216,
+  "external_axiom_count": 7,
+  "all_project_axiom_count": 7,
+  "forbidden_tokens": [],
+  "unapproved_axioms": [],
+  "orphan_modules": [],
+  "excluded_modules": [
+    "LittlewoodInverse.MomentCertificateTest"
+  ]
+}

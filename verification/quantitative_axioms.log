@@ -1,0 +1,10 @@
+LittlewoodInverse.quantitative_theorem : LittlewoodInverse.QuantitativeTheorem
+'LittlewoodInverse.quantitative_theorem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.HardyExternal.bounded_holomorphic_radial_boundary,
+ LittlewoodInverse.HardyExternal.schwarz_integral_boundary]
+'LittlewoodInverse.NumericalConstant.tailError_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.NumericalConstant.littlewoodCoefficient_gt_sharp_decimal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

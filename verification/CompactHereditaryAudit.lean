@@ -1,0 +1,6 @@
+import LittlewoodInverse.CompactHereditary
+
+#print axioms LittlewoodInverse.discreteEvaluation_injective
+#print axioms LittlewoodInverse.integral_compactSet_norm_four
+#print axioms LittlewoodInverse.compact_spectral_hereditary_energy
+#print axioms LittlewoodInverse.discrete_spectral_hereditary_energy

@@ -1,0 +1,11 @@
+import LittlewoodInverse.QuantitativeTheorem
+import LittlewoodInverse.Corollaries
+
+#check LittlewoodInverse.quantitative_theorem
+#check LittlewoodInverse.structural_inverse_theorem
+#check LittlewoodInverse.macroscopic_energy_corollary
+#check LittlewoodInverse.exceptional_perturbation_corollary
+#print axioms LittlewoodInverse.quantitative_theorem
+#print axioms LittlewoodInverse.structural_inverse_theorem
+#print axioms LittlewoodInverse.macroscopic_energy_corollary
+#print axioms LittlewoodInverse.exceptional_perturbation_corollary

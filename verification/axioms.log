@@ -1,0 +1,98 @@
+LittlewoodInverse.quantitative_theorem : LittlewoodInverse.QuantitativeTheorem
+LittlewoodInverse.structural_inverse_theorem : LittlewoodInverse.StructuralInverseTheorem
+LittlewoodInverse.macroscopic_energy_corollary (K β Δ δ : ℝ) (hK : 1 ≤ K) (hβ : 0 < β) (hβ1 : β ≤ 1) (hΔ : 1 ≤ Δ)
+  (hδ : 0 < δ) (hδ1 : δ ≤ 1) :
+  ∃ N₀ ρ,
+    2 ≤ N₀ ∧
+      0 < ρ ∧
+        ∀ (A : Finset ℤ),
+          N₀ ≤ A.card →
+            LittlewoodInverse.AdmitsAssemblyModel β Δ A →
+              LittlewoodInverse.littlewoodNorm A ≤ K * Real.log ↑A.card →
+                ∀ Y ⊆ A, δ * ↑A.card ≤ ↑Y.card → ρ * ↑Y.card ^ 3 ≤ ↑(LittlewoodInverse.additiveEnergy Y)
+LittlewoodInverse.exceptional_perturbation_corollary (K ε β Δ H : ℝ) (hK : 1 ≤ K) (hε : 0 < ε) (hε1 : ε < 1 / 2)
+  (hβ : 0 < β) (hβ1 : β ≤ 1) (hΔ : 1 ≤ Δ) (hH : 0 ≤ H) :
+  ∃ N₀ c C,
+    2 ≤ N₀ ∧
+      0 < c ∧
+        0 < C ∧
+          ∀ (A B : Finset ℤ),
+            N₀ ≤ A.card →
+              LittlewoodInverse.littlewoodNorm A ≤ K * Real.log ↑A.card →
+                LittlewoodInverse.AdmitsAssemblyModel β Δ B →
+                  ↑(symmDiff A B).card ≤ H * Real.log ↑A.card ^ 2 → LittlewoodInverse.AlmostCover A ε c C
+LittlewoodInverse.compact_dual_sidon_constant_one.{u_2} {G : Type u_2} [CommGroup G] [TopologicalSpace G]
+  [IsTopologicalGroup G] [CompactSpace G] [MeasurableSpace G] [BorelSpace G] (μ : MeasureTheory.Measure G)
+  [MeasureTheory.IsProbabilityMeasure μ] [μ.IsMulLeftInvariant] {R : Finset (Additive (PontryaginDual G))}
+  (hR : LittlewoodInverse.AdditiveSidon R) (a : Additive (PontryaginDual G) → ℂ) :
+  (∑ r ∈ R, ‖a r‖ ^ 20) ^ (1 / 20) ≤ ∫ (x : G), ‖∑ r ∈ R, a r * ↑((Additive.toMul r) x)‖ ∂μ
+LittlewoodInverse.discrete_spectral_hereditary_energy.{u_1} (Γ : Type u_1) [AddCommGroup Γ] [TopologicalSpace Γ]
+  [DiscreteTopology Γ] [DecidableEq Γ] {Y X : Finset Γ} (hYX : Y ⊆ X) :
+  ↑Y.card ^ 4 / (LittlewoodInverse.discreteLittlewoodNorm Γ X ^ 2 * ↑X.card) ≤ ↑(LittlewoodInverse.additiveEnergy Y)
+LittlewoodInverse.discrete_freiman_transport.{u_1, u_2} {Γ : Type u_1} {Λ : Type u_2} [AddCommGroup Γ] [AddCommGroup Λ]
+  [TopologicalSpace Γ] [DiscreteTopology Γ] [TopologicalSpace Λ] [DiscreteTopology Λ] [DecidableEq Γ] [DecidableEq Λ]
+  {h : ℕ} (hh : 2 ≤ h) {A : Finset Γ} {B : Set Λ} {f : Γ → Λ} (hf : IsAddFreimanIso h (↑A) B f) {C : Finset Γ}
+  (hCA : C ⊆ A) :
+  |LittlewoodInverse.discreteLittlewoodNorm Γ C - LittlewoodInverse.discreteLittlewoodNorm Λ (Finset.image f C)| ≤
+      4 * ↑C.card / (Real.pi * (2 * ↑h + 1)) ∧
+    LittlewoodInverse.additiveEnergy C = LittlewoodInverse.additiveEnergy (Finset.image f C) ∧
+      (LittlewoodInverse.sumset C).card = (LittlewoodInverse.sumset (Finset.image f C)).card
+LittlewoodInverse.discrete_model_family_norm_transport.{u_1, u_2, u_3} {ι : Type u_1} {Γ₀ : Type u_2} {Γ : ι → Type u_3}
+  [AddCommGroup Γ₀] [(i : ι) → AddCommGroup (Γ i)] [(i : ι) → TopologicalSpace (Γ i)]
+  [∀ (i : ι), DiscreteTopology (Γ i)] [(i : ι) → DecidableEq (Γ i)] (A : Finset Γ₀) (B : (i : ι) → Finset (Γ i))
+  (f : (i : ι) → Γ₀ → Γ i) (hf : ∀ (i : ι), IsAddFreimanIso A.card (↑A) (↑(B i)) (f i)) (i j : ι) {C : Finset Γ₀}
+  (hCA : C ⊆ A) :
+  |LittlewoodInverse.discreteLittlewoodNorm (Γ i) (Finset.image (f i) C) -
+        LittlewoodInverse.discreteLittlewoodNorm (Γ j) (Finset.image (f j) C)| <
+    2 / Real.pi
+LittlewoodInverse.long_block_signed_progressions (K : ℝ) (hK : 1 ≤ K) :
+  ∃ N₀ B,
+    0 < B ∧
+      ∀ (q : ℕ) [NeZero q] (M : ℕ),
+        0 < M →
+          ∀ (C : Finset (ZMod q × ℤ)),
+            C.Nonempty →
+              C.card ≤ M →
+                N₀ ≤ (LittlewoodInverse.blockInflation q M C).card →
+                  LittlewoodInverse.littlewoodNorm (LittlewoodInverse.blockInflation q M C) ≤
+                      K * Real.log ↑(LittlewoodInverse.blockInflation q M C).card →
+                    ∃ D, ↑(Fintype.card D.Index) ≤ B
+'LittlewoodInverse.quantitative_theorem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.HardyExternal.bounded_holomorphic_radial_boundary,
+ LittlewoodInverse.HardyExternal.schwarz_integral_boundary]
+'LittlewoodInverse.structural_inverse_theorem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.External.mps_weighted,
+ LittlewoodInverse.External.polynomial_bsg]
+'LittlewoodInverse.macroscopic_energy_corollary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.External.mps_weighted,
+ LittlewoodInverse.External.polynomial_bsg]
+'LittlewoodInverse.exceptional_perturbation_corollary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.External.mps_weighted,
+ LittlewoodInverse.External.polynomial_bsg]
+'LittlewoodInverse.NumericalConstant.littlewoodCoefficient_gt_sharp_decimal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LittlewoodInverse.compact_dual_sidon_constant_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.discrete_spectral_hereditary_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.discrete_freiman_transport' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.discrete_model_family_norm_transport' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.long_block_signed_progressions' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.BackgroundExternal.green_sanders,
+ LittlewoodInverse.External.mps_weighted]
+'LittlewoodInverse.Landau.spectral_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.Landau.extremizer_attains' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.HardyExternal.bounded_holomorphic_radial_boundary]
+'LittlewoodInverse.Landau.completion_log_asymptotic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.outer_interval_log_endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]

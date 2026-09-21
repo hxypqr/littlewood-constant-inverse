@@ -1,0 +1,17 @@
+'LittlewoodInverse.Landau.coefficient_convolution' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.Landau.spectral_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.Landau.polynomial_ne_zero_closedDisk' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.Landau.extremizer_support' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.HardyExternal.bounded_holomorphic_radial_boundary]
+'LittlewoodInverse.Landau.extremizer_attains' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ LittlewoodInverse.HardyExternal.bounded_holomorphic_radial_boundary]
+'LittlewoodInverse.Landau.sum_b_sq_log_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.Landau.boundary_square' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.Landau.quotient_phase_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.Landau.completionError_integral_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.Landau.completion_pairing_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LittlewoodInverse.Landau.completion_log_asymptotic' depends on axioms: [propext, Classical.choice, Quot.sound]

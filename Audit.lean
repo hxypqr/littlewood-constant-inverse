@@ -1,0 +1,28 @@
+import LittlewoodInverse
+
+/-! Selected proof and dependency audit. AuditAll.lean covers every public theorem. -/
+
+#check LittlewoodInverse.quantitative_theorem
+#check LittlewoodInverse.structural_inverse_theorem
+#check LittlewoodInverse.macroscopic_energy_corollary
+#check LittlewoodInverse.exceptional_perturbation_corollary
+#check LittlewoodInverse.compact_dual_sidon_constant_one
+#check LittlewoodInverse.discrete_spectral_hereditary_energy
+#check LittlewoodInverse.discrete_freiman_transport
+#check LittlewoodInverse.discrete_model_family_norm_transport
+#check LittlewoodInverse.long_block_signed_progressions
+
+#print axioms LittlewoodInverse.quantitative_theorem
+#print axioms LittlewoodInverse.structural_inverse_theorem
+#print axioms LittlewoodInverse.macroscopic_energy_corollary
+#print axioms LittlewoodInverse.exceptional_perturbation_corollary
+#print axioms LittlewoodInverse.NumericalConstant.littlewoodCoefficient_gt_sharp_decimal
+#print axioms LittlewoodInverse.compact_dual_sidon_constant_one
+#print axioms LittlewoodInverse.discrete_spectral_hereditary_energy
+#print axioms LittlewoodInverse.discrete_freiman_transport
+#print axioms LittlewoodInverse.discrete_model_family_norm_transport
+#print axioms LittlewoodInverse.long_block_signed_progressions
+#print axioms LittlewoodInverse.Landau.spectral_bound
+#print axioms LittlewoodInverse.Landau.extremizer_attains
+#print axioms LittlewoodInverse.Landau.completion_log_asymptotic
+#print axioms LittlewoodInverse.outer_interval_log_endpoint

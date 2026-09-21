@@ -1,0 +1,5 @@
+import LittlewoodInverse.FiniteBand
+
+#print axioms LittlewoodInverse.outer_damping
+#print axioms LittlewoodInverse.finite_product_nonpositive_support_mean
+#print axioms LittlewoodInverse.finite_band_certificate

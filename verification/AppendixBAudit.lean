@@ -1,0 +1,13 @@
+import LittlewoodInverse.LandauResults
+
+#print axioms LittlewoodInverse.Landau.coefficient_convolution
+#print axioms LittlewoodInverse.Landau.spectral_bound
+#print axioms LittlewoodInverse.Landau.polynomial_ne_zero_closedDisk
+#print axioms LittlewoodInverse.Landau.extremizer_support
+#print axioms LittlewoodInverse.Landau.extremizer_attains
+#print axioms LittlewoodInverse.Landau.sum_b_sq_log_error
+#print axioms LittlewoodInverse.Landau.boundary_square
+#print axioms LittlewoodInverse.Landau.quotient_phase_error
+#print axioms LittlewoodInverse.Landau.completionError_integral_le
+#print axioms LittlewoodInverse.Landau.completion_pairing_lower
+#print axioms LittlewoodInverse.Landau.completion_log_asymptotic
