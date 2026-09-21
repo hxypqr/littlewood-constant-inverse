@@ -4,6 +4,14 @@ Lean 4 formalization of *An improved Littlewood constant and structural inverse 
 
 The project uses **Lean 4.32.0** and **mathlib v4.32.0**. Seven external mathematical results are explicitly declared as Lean axioms; their statements, sources, and uses are documented below. The internal proofs contain no `sorry`, `admit`, or `native_decide`.
 
+## Manuscript
+
+- [Revised LaTeX source prepared for arXiv](manuscript/Littlewood_constant_inverse_arxiv.tex)
+- [Reference manuscript PDF](manuscript/Littlewood_constant_inverse.pdf)
+- [Reference manuscript LaTeX](manuscript/Littlewood_constant_inverse.tex)
+
+The revised source contains presentation and contact-information updates. The reference snapshot dated 2026-09-06 is preserved for the proof-coverage map and archived manuscript checksums; the mathematical statements and proofs are unchanged.
+
 ## Main results and entry points
 
 For a finite integer set $A$, write
@@ -89,5 +97,5 @@ The included verification snapshot records 137 formal modules, 1,219 theorem dec
 | [LittlewoodInverse.lean](LittlewoodInverse.lean) | Top-level import |
 | [LittlewoodInverse/](LittlewoodInverse/) | Definitions, proofs, numerical certificates, and explicit external inputs |
 | [verification/](verification/) | Manuscript coverage, source and dependency audits, reports, and certificate generation |
-| [manuscript/](manuscript/) | Reference manuscript snapshot (2026-09-06), in PDF and LaTeX |
+| [manuscript/](manuscript/) | Revised LaTeX source and the reference manuscript snapshot (2026-09-06) |
 | [AuditAll.lean](AuditAll.lean) | Complete public-theorem dependency audit |

@@ -1,0 +1,2246 @@
+\documentclass[11pt,reqno]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=3cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,amsthm}
+\usepackage{mathrsfs}
+\usepackage{needspace}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,hypertexnames=false]{hyperref}
+\usepackage{fancyhdr}
+\numberwithin{equation}{section}
+\setcounter{tocdepth}{1}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\T}{\mathbb T}
+\newcommand{\N}{\mathbb N}
+\newcommand{\C}{\mathbb C}
+\newcommand{\E}{\mathbb E}
+\newcommand{\La}{\mathcal L}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\ip}[2]{\langle#1,#2\rangle}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Rea}{Re}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Maj}{Maj}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\cMPS}{c_{\mathrm{MPS}}}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{\texttt{doi:#1}}}
+\newcommand{\arxiv}[1]{\href{https://arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+\setlength{\parskip}{0em}
+\setlist{itemsep=0pt,topsep=0.3em,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=*,label=\textup{(\roman*)}}
+\allowdisplaybreaks[1]
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{13pt}
+\setlength{\footskip}{13pt}
+\fancyhead[C]{\ifodd\value{page}{\small XIYU HU}\else{\small LITTLEWOOD CONSTANTS AND STRUCTURAL INVERSE THEOREMS}\fi}
+\fancyfoot[C]{\thepage}
+\setlength{\emergencystretch}{2em}
+\hypersetup{pdftitle={An improved Littlewood constant and structural inverse theorems},pdfauthor={Xiyu Hu},pdfsubject={Fourier L1 norms, additive energy, and structured integer sets},pdfkeywords={Littlewood conjecture, inverse theorem, additive energy, outer functions, Sidon sets}}
+\title[Littlewood constants and structural inverse theorems]{An improved Littlewood constant and structural inverse theorems}
+\author{Xiyu Hu}
+\address{University of Chinese Academy of Sciences}
+\email{hxypqr@gmail.com}
+\date{}
+\subjclass[2020]{Primary 42A05, 11B30; Secondary 42A55, 43A46}
+\keywords{Littlewood conjecture, Fourier $L^1$ norm, additive energy, outer functions, Sidon sets, Freiman isomorphisms}
+\begin{document}
+\begin{abstract}
+For a finite set $A\subset\Z$, write
+$\La(A)=\int_0^1|\sum_{a\in A}e^{2\pi iat}|\,dt$.
+We prove the uniform lower bound
+$\La(A)\ge(c_*-o(1))\log|A|$, where $c_*>0.2459209$ is explicit.
+We also establish an almost-covering inverse theorem for an explicit class
+of integer sets generated from dense separated blocks and long arithmetic
+block inflations by cyclic Sidon-fibre decompositions of arbitrary depth.
+If $A$ belongs to this class and $\La(A)\le K\log|A|$, then, for every
+$\eps>0$, all but $\eps|A|$ points are covered by boundedly many disjoint,
+linear-sized subsets of bounded doubling. The constants depend only on
+$K$, $\eps$, and the fixed terminal-geometry parameters, and are independent
+of the decomposition depth, branching, moduli, and diameter.
+The same conclusion holds under high-order Freiman modelling.
+\end{abstract}
+\maketitle
+\tableofcontents
+
+\Needspace{7\baselineskip}
+\section{Introduction}
+\label{sec:introduction}
+
+Let $e(t)=\exp(2\pi it)$ and, for a finite set of integers $A$, put
+\begin{equation}\label{eq:norm-definition}
+ F_A(t)=\sum_{a\in A}e(at),\qquad
+ \La(A)=\int_{\T}|F_A(t)|\,dt,\qquad \T=\R/\Z.
+\end{equation}
+The measure on $\T$ is the probability Haar measure, and all logarithms in
+this paper are natural. Littlewood's conjecture, proved independently by
+Konyagin~\cite{Konyagin} and McGehee, Pigno, and Smith~\cite{MPS}, states that
+$\La(A)\gg\log|A|$. The order of magnitude is attained by arithmetic
+progressions. Indeed, if $P$ is a progression of length $N$, then
+\begin{equation}\label{eq:ap-asymptotic}
+ \La(P)=\frac4{\pi^2}\log N+O(1).
+\end{equation}
+Translation and nonzero integer dilation preserve $\La$, so this expression
+does not depend on the location or common difference of $P$.
+
+There are two natural questions beyond the logarithmic lower bound. The
+first is quantitative: can its leading constant be increased towards
+$4/\pi^2$? The second is structural: what can a set look like when its
+Fourier $L^1$ norm is only a constant multiple of $\log N$, rather than a
+quantity comparable to the elementary upper bound $\sqrt N$? These
+questions are related through duality, but a quantitative improvement to
+a bounded test function does not by itself provide a structural inverse
+theorem. This paper treats both questions, and keeps their conclusions
+and hypotheses separate.
+
+\subsection{Previous work and the connection with Bloom--Green}
+
+The stronger assertion that an arithmetic progression minimizes $\La(A)$
+among all $N$-element sets, as well as its leading-constant version, is
+usually called the strong Littlewood conjecture; see Hardy--Littlewood
+\cite{HardyLittlewood} and Zygmund~\cite{Zygmund}. The MPS proof gives a
+weighted inequality for arbitrary complex coefficients, not merely the
+indicator-set case. Stegeman~\cite{Stegeman} and Yabuta~\cite{Yabuta}
+refined the numerical constant in that argument, with Yabuta obtaining a
+coefficient approximately $0.12959$. Fournier~\cite{Fournier} discusses the
+bounded-test-function methods underlying the classical proofs.
+
+Bloom and Green~\cite{BG} revisit the MPS construction with two purposes.
+They obtain the coefficient $0.170934\ldots$, and, by examining the
+failure of a putative larger lower bound, prove the following inverse
+statement. If $|A|=N$ and $\La(A)\le K\log N$, then for
+$0<\delta\le1/2$ there is an initial segment $A'\subseteq A$ with
+\begin{equation}\label{eq:BG-baseline}
+ |A'|\gg N^{1-\delta},\qquad
+ E(A')\gg(\delta/K)^2|A'|^3,
+\end{equation}
+where
+\[
+ E(B)=\#\{(b_1,b_2,b_3,b_4)\in B^4:b_1+b_2=b_3+b_4\}
+     =\int_{\T}|F_B|^4
+\]
+is the additive energy. Their analysis exposes an energy square root in
+the error of the ordered MPS recursion. Standard additive-combinatorial
+results then turn \eqref{eq:BG-baseline} into small-doubling subsets and
+arithmetic-progression consequences. Their result is unrestricted: it
+applies to every finite integer set.
+
+Earlier structural work addressed rather different descriptions of
+complexity. Petridis~\cite{Petridis} and Hanson~\cite{Hanson} show that
+sufficiently genuine multidimensional structure increases the Fourier
+norm. Pichorides~\cite{Pichorides}, and independently Bedert~\cite{Bedert},
+relate the norm to the size of dissociated subsets. In another direction,
+the finite-group theorem of Green and Sanders~\cite{GreenSanders}
+classifies integer-valued functions of bounded Fourier algebra norm by
+bounded combinations of coset indicators. The latter has a constant
+spectral budget, unlike the logarithmic budget of the integer
+Littlewood problem. Bourgain~\cite{Bourgain} and Bedert~\cite{Bedert}
+also connect these questions to large sum-free subsets.
+
+Our starting point is the same dual principle as in Bloom--Green: a
+bounded test function tries to accumulate contributions, and the
+obstruction to accumulation contains information. For the numerical
+problem we retain the entire product of the damping multipliers. For the
+inverse problem we arrange that an obstruction is inherited by every
+remaining family of blocks, while all pairings continue to use the
+\emph{original} target. This distinction allows repeated structural
+extraction without assuming that deleting frequencies decreases an
+$L^1$ norm.
+
+\subsection{The quantitative theorem}
+
+For $p>1$ define
+\begin{equation}\label{eq:sinc-intro}
+ I_p=\int_{\R}\left|\frac{\sin\pi x}{\pi x}\right|^p\,dx,
+ \qquad c_{2r}=I_{2r},\qquad
+ c_{2r+1}=\sqrt{I_{2r}I_{2r+2}}\quad(r\ge1).
+\end{equation}
+Put $a=9/10$ and
+\begin{align}
+ \mathcal E_a&=\frac{55a^2}{108}
+ +\frac19\left\{
+ \frac23\left(\frac{5a^4}{6}-\frac{2a^3}{3}\right)
+ +2\sum_{k=5}^{\infty}\frac{c_ka^k}{k}\right\},
+ \label{eq:E-intro}\\
+ c_*&=\frac{9}{10\log9}\left(1-\sqrt{\mathcal E_{9/10}/3}\right).
+ \label{eq:cstar}
+\end{align}
+The series is absolutely convergent, since $0<c_k\le1$.
+
+\begin{theorem}[An explicit Littlewood coefficient]\label{thm:constant}
+For every finite set $A\subset\Z$ of cardinality $N$,
+\begin{equation}\label{eq:constant-result}
+ \La(A)\ge(c_*-o(1))\log N,
+ \qquad c_*>0.2459209.
+\end{equation}
+The $o(1)$ is uniform over all $N$-element integer sets.
+\end{theorem}
+
+The parameter choices in \eqref{eq:E-intro} are explicit rather than
+numerically optimized. The proof has three ingredients. First, an outer
+multiplier of modulus $1-a|F_B|/|B|$ uses exactly the pointwise room left
+by the source term $aF_B/|B|$. Second, the error of a product is estimated
+before its factors are separated; its second-order expansion retains the
+loss of squared modulus. Third, the same scalar variable controls both
+terms, and interval moment bounds handle the only tail level at which a
+nonconstant majorant is needed. We provide a self-contained proof of the
+moment comparison using symmetric chains, and an exact-rational
+certificate for the displayed decimal.
+
+\subsection{The structural theorem and its precise class}
+
+The conclusion of our inverse theorem is an almost-covering by large
+small-doubling sets. Its hypotheses specify how the original integer set
+is assembled; they are not deduced from small $\La$. We give the complete
+definition here so that the scope of the main statement is visible from
+the introduction.
+
+\begin{definition}[Additive Sidon sets]\label{def:sidon}
+A subset $R$ of an abelian group is \emph{Sidon} if
+$r_1+r_2=r_3+r_4$ with $r_i\in R$ implies equality of the two unordered
+pairs, with repetitions allowed. This is the additive $B_2$ condition,
+not the harmonic-analytic definition of a Sidon spectrum.
+\end{definition}
+
+Fix $0<\beta\le1$ and $\Delta\ge1$. We use two terminal geometries,
+together with singletons. Their affine copies are also allowed.
+
+\begin{definition}[Terminal sets]\label{def:terminals}
+A nonempty finite integer set is a terminal set if it is a singleton,
+or an affine copy under $x\mapsto u+vx$, $v\in\Z\setminus\{0\}$, of one
+of the following sets.
+\begin{enumerate}
+\item A \emph{dense separated block set} $C$, of size $n$, has an exact
+representation
+\begin{equation}\label{eq:terminal-packet}
+ C=\bigcup_{i=1}^R(b_i+C_i),\qquad C_i\subseteq[-D,D]\cap\Z,
+\end{equation}
+where $D,M$ are positive integers and
+\begin{equation}\label{eq:terminal-packet-conditions}
+ |C_i|\ge M\ge n^\beta,\qquad D\le\Delta M,
+ \qquad |b_i-b_j|>4D\quad(i\ne j).
+\end{equation}
+The centres need not lie in a common progression and the $C_i$ need not
+be intervals.
+\item A \emph{long arithmetic block inflation} is
+\begin{equation}\label{eq:terminal-inflation}
+ A_M(\mathcal C)=
+ \{b+q(Mu+r):(b,u)\in\mathcal C,\ 0\le r<M\},
+\end{equation}
+where $q,M\ge1$, $\varnothing\ne\mathcal C\subset(\Z/q\Z)\times\Z$ is
+finite, $b$ is represented in $\{0,\ldots,q-1\}$, and
+$M\ge V:=|\mathcal C|$. Its cardinality is $MV$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[The assembly class]\label{def:class}
+Let $\mathfrak G_{\beta,\Delta}$ consist of the nonempty finite integer
+sets represented by finite rooted trees with terminal sets as leaves.
+At every internal vertex, after an affine normalization, its set is the
+exact union
+\begin{equation}\label{eq:node}
+ A_v=\bigcup_{r\in R_v}(r+q_v A_{v,r}),\qquad q_v\ge2,
+\end{equation}
+where $R_v\subset\Z/q_v\Z$ is the \emph{entire} nonempty residue support,
+is Sidon, and the children are the nonempty sets $A_{v,r}$. The images
+of the children partition the parent. One-child vertices are allowed.
+There is no bound on depth, branching numbers, moduli, integer diameter,
+or the number of leaves.
+\end{definition}
+
+\begin{theorem}[An almost-covering inverse theorem]\label{thm:inverse}
+Fix $K\ge1$, $0<\eps<1/2$, $0<\beta\le1$, and $\Delta\ge1$. There are
+$N_0$, $c>0$, and $C<\infty$, depending only on these parameters, with the
+following property. If
+\[
+ A\in\mathfrak G_{\beta,\Delta},\qquad |A|=N\ge N_0,
+ \qquad \La(A)\le K\log N,
+\]
+then there are pairwise disjoint nonempty subsets $B_1,\ldots,B_J\subseteq A$
+such that
+\begin{equation}\label{eq:cover-conclusion}
+ \left|A\setminus\bigcup_{j=1}^J B_j\right|\le\eps N,
+ \qquad J\le C,\qquad |B_j|\ge cN,\qquad
+ |B_j+B_j|\le C|B_j|.
+\end{equation}
+The constants do not depend on any of the tree parameters excluded in
+Definition~\ref{def:class}.
+The same conclusion holds if an order-$N$ Freiman-isomorphic image of
+$A$ belongs to $\mathfrak G_{\beta,\Delta}$.
+\end{theorem}
+
+Here a Freiman isomorphism of order $h$ is a bijection preserving in both
+directions all equalities between sums of at most $h$ terms on each side,
+with equal numbers of terms and with repetitions. The last clause is
+justified by a uniform estimate for the Fourier norms of \emph{all}
+corresponding subsets; no order-two invariance of the norm is assumed.
+
+\begin{corollary}[Macroscopic hereditary energy]\label{cor:main-hered}
+Fix $K,\beta,\Delta$ and $0<\delta\le1$. Under the geometric or modelling
+hypothesis of Theorem~\ref{thm:inverse}, if $N$ is sufficiently large and
+$\La(A)\le K\log N$, every $Y\subseteq A$ with $|Y|\ge\delta N$ satisfies
+\[
+ E(Y)\ge\rho_{K,\beta,\Delta,\delta}|Y|^3
+\]
+for a positive constant independent of $A,N,Y$.
+\end{corollary}
+
+Theorem~\ref{thm:inverse} has a stronger conclusion than
+\eqref{eq:BG-baseline} on the specified class, but has a stronger
+hypothesis as well. It is not an unrestricted improvement of the
+Bloom--Green inverse theorem. In particular, we do not prove that a
+small-norm integer set possesses the tree in Definition~\ref{def:class},
+even after high-order modelling. The pieces in \eqref{eq:cover-conclusion}
+are small-doubling sets, not necessarily single progressions, and their
+number can depend on $\eps$. Thus the result also stops short of the
+signed-progression conjecture of Petridis and Bloom--Green.
+
+\subsection{How the two arguments fit together}
+
+In both parts of the paper, the main issue is to keep the information
+that a norm estimate would otherwise discard. In the quantitative part,
+separately maximizing the outer-function error and the surviving modulus
+loses their dependence on the same variable. The whole-product estimate
+restores that dependence. In the structural part, replacing all failed
+amplifications by a single energy estimate loses the possibility of
+iteration. We instead prove an ambient-target hereditary inequality
+\begin{equation}\label{eq:hereditary-intro}
+ E(S)\ge\eta\frac{|S|^4}{|\Lambda|}
+ \qquad(\varnothing\ne S\subseteq\Lambda)
+\end{equation}
+for the integer labels of separated blocks. Bounded majority polynomials
+force a positive density of mixed correlations, and finite Fourier
+bandwidth turns those correlations into relations with a bounded carry.
+The original target is never replaced by the remaining block union.
+
+Long arithmetic blocks provide a different route to the same invariant.
+Taking a discrete boundary removes the long direction, and the coefficient
+of its logarithmic contribution is a constant-scale spectral norm.
+Integer-valuedness then bounds the number of common boundary heights.
+Finite-group structure can be lifted back to integers while retaining
+the possible carries. Both local arguments feed into a hereditary
+energy-to-covering principle based on BSG.
+
+A final obstruction to iteration is the multiplication of losses along
+an arbitrarily deep tree. We avoid it through the coefficient inequality
+\[
+ \left\|\sum_{r\in R}a_r\chi_r\right\|_1
+ \ge\left(\sum_{r\in R}|a_r|^{20}\right)^{1/20}
+ \quad\text{for additive Sidon }R.
+\]
+The exponent is not optimized; the constant one is essential. It gives
+an exact budget for all leaves at once, even for very unbalanced trees.
+Only boundedly many macroscopic leaves survive the logarithmic norm
+bound, and the two local covering theorems complete the proof.
+
+Section~\ref{sec:preliminaries} records the external inputs.
+Sections~\ref{sec:moments}--\ref{sec:constant-proof} prove
+Theorem~\ref{thm:constant}. Sections~\ref{sec:hered}--\ref{sec:gluing}
+prove Theorem~\ref{thm:inverse}; Section~\ref{sec:transport} treats modelling
+and small exceptional perturbations. Examples and the remaining general
+problem are discussed in Section~\ref{sec:scope}. The appendices give
+an exact numerical certificate and a one-sided obstruction, together
+with a two-sided interval model for the sharp constant.
+
+\Needspace{7\baselineskip}
+\section{Notation and standard inputs}\label{sec:preliminaries}
+
+For a function $f$ on $\T$, its Fourier coefficient is
+$\widehat f(n)=\int_\T f(t)e(-nt)\,dt$. For finitely supported functions on
+an abelian group, convolution has its usual counting-measure convention.
+The transform $F_X$ of an indicator is the sum of the associated
+characters on the compact dual. All dual Haar measures, including those
+on finite groups, have total mass one. Pairings are linear in the first
+entry: $\ip fg=\int f\overline g$. The normalized energy is
+$\omega(X)=E(X)/|X|^3$. We use $c,C$ for positive absolute constants that
+may change, with subscripts indicating additional dependence.
+
+The identity $\int|F_X|^2=|X|$ and Fourier inversion imply
+\begin{equation}\label{eq:trivial-norms}
+ 1\le\La(X)\le\sqrt{|X|}\quad(X\ne\varnothing).
+\end{equation}
+Also, by Cauchy--Schwarz applied to the representation function of $X+X$,
+\begin{equation}\label{eq:energy-doubling}
+ E(X)\ge\frac{|X|^4}{|X+X|}.
+\end{equation}
+These statements apply to finite subsets of any discrete abelian group.
+
+Apart from standard Fourier and Hardy-space facts, we use the following
+two established results as external inputs. The further analytic and
+combinatorial implications needed for our main statements are proved below.
+
+\begin{theorem}[McGehee--Pigno--Smith~\cite{MPS}]\label{thm:MPS}
+There is an absolute $\cMPS>0$ such that, whenever
+$n_1<\cdots<n_m$ are integers and $u_1,\ldots,u_m\in\C$,
+\begin{equation}\label{eq:MPS-weighted}
+ \int_\T\left|\sum_{j=1}^m u_je(n_jt)\right|\,dt
+ \ge\cMPS\sum_{j=1}^m\frac{|u_j|}{j}.
+\end{equation}
+In particular, after decreasing $\cMPS$ if necessary,
+$\La(X)\ge\cMPS\log(|X|+1)$ for every nonempty finite integer set.
+\end{theorem}
+The complex-coefficient formulation \eqref{eq:MPS-weighted} is also
+stated explicitly in Hanson~\cite[Theorem 1.1]{Hanson}. We will need it
+with some coefficients equal to zero, which is harmless: removing them
+only decreases their indices on the right.
+
+\begin{theorem}[Polynomial Balog--Szemer\'edi--Gowers]\label{thm:BSG}
+There are absolute $c,C>0$ such that, for a finite nonempty subset $Y$ of
+an abelian group and $0<\gamma\le1$, the inequality
+$E(Y)\ge\gamma|Y|^3$ yields a subset $Z\subseteq Y$ with
+\[
+ |Z|\ge c\gamma^C|Y|,
+ \qquad |Z+Z|\le C\gamma^{-C}|Z|.
+\]
+\end{theorem}
+We use this standard qualitative-polynomial form; see
+Tao--Vu~\cite[Theorem 2.31]{TaoVu} and the quantitative refinements of
+Reiher--Schoen~\cite{ReiherSchoen}. The latter are formulated with a
+small difference set. The standard sum--difference inequalities convert
+that conclusion to the displayed form, with a change in the absolute
+powers. No optimization of BSG exponents is used here.
+
+For $q\ge2$ and $r\in\{0,\ldots,q-1\}$ set
+$A_r=\{m:r+qm\in A\}$. Character orthogonality gives
+\begin{equation}\label{eq:residue-projection}
+ \frac1q\sum_{j=0}^{q-1}e(-rj/q)F_A(t+j/q)
+   =e(rt)F_{A_r}(qt).
+\end{equation}
+Consequently $\La(A_r)\le\La(A)$. Moreover
+\begin{equation}\label{eq:affine-invariance}
+ \La(u+vA)=\La(A)\qquad(u,v\in\Z,\ v\ne0).
+\end{equation}
+Both identities follow from Haar invariance, including for negative
+$v$. The contraction in \eqref{eq:residue-projection} does not control
+$|A_r|$, and will not be used to discard a small fibre without a separate
+mass estimate.
+
+\Needspace{7\baselineskip}
+\section{Interval bounds for all even moments}\label{sec:moments}
+
+The numerical argument needs precise moment constants. Although these
+bounds are related to classical Fourier rearrangement inequalities
+\cite{Gabriel,HardyLittlewood}, for indicator sets they follow from an
+elementary antichain argument. We give the argument to make the precise
+extremal input, including its constant, independent of a rearrangement
+convention.
+
+\begin{lemma}[Symmetric chains]\label{lem:chains}
+The product $\{0,\ldots,n-1\}^d$, partially ordered coordinatewise, has a
+partition into saturated chains symmetric about rank $d(n-1)/2$.
+In particular every antichain has size at most the largest rank level.
+\end{lemma}
+\begin{proof}
+A single chain has the required property. To pass from a symmetric chain
+decomposition of a ranked poset to one of its product with a chain, it
+suffices to decompose a rectangle $\{0,\ldots,p\}\times\{0,\ldots,q\}$.
+Assume $p\ge q$, interchanging the coordinates otherwise. For
+$0\le j\le q$, take the chain
+\[
+ \{(i,j):0\le i\le p-j\}
+ \ \cup\ \{(p-j,k):j<k\le q\}.
+\]
+These chains are disjoint and cover the rectangle. The first and last
+ranks of the $j$th chain are $j$ and $p+q-j$. Thus each is symmetric.
+If the original chain starts at an offset rank, the same construction
+preserves symmetry about the rank of the full product. Induction proves
+the decomposition. Every symmetric chain meets a middle rank exactly
+once, and every antichain meets a chain at most once. This proves the
+last assertion. This is the symmetric-chain construction of de Bruijn,
+van Ebbenhorst Tengbergen, and Kruyswijk~\cite{BTK}.
+\end{proof}
+
+\begin{proposition}[Even-moment comparison]\label{prop:moments}
+If $B\subset\Z$ has $n$ elements and $r\ge1$, then
+\begin{equation}\label{eq:even-max}
+ \int_\T|F_B|^{2r}\le
+ [z^{r(n-1)}](1+z+\cdots+z^{n-1})^{2r}
+ =\int_\T|F_{\{0,\ldots,n-1\}}|^{2r}.
+\end{equation}
+In particular
+\begin{equation}\label{eq:energy-max}
+ E(B)\le\frac{2n^3+n}{3}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Write $B=\{b_0<\cdots<b_{n-1}\}$. An additive relation counted by the
+left side of \eqref{eq:even-max} is represented by a point
+$x\in\{0,\ldots,n-1\}^{2r}$ satisfying
+\[
+ b_{x_1}+\cdots+b_{x_r}
+ -b_{n-1-x_{r+1}}-\cdots-b_{n-1-x_{2r}}=0.
+\]
+The expression on the left strictly increases when any coordinate
+increases. Its zero set is therefore an antichain. By
+Lemma~\ref{lem:chains}, it has size at most the central rank of the grid,
+which is the coefficient in \eqref{eq:even-max}. For the interval, every
+point of that rank satisfies the required equality, so equality holds.
+For $r=2$, the interval difference representation function is
+$n-|h|$ for $|h|<n$. Its squared sum is
+$n^2+2\sum_{j=1}^{n-1}j^2=(2n^3+n)/3$.
+\end{proof}
+
+\begin{corollary}[Uniform normalized moments]\label{cor:normalized-moments}
+Let $u_B=|F_B|/n$ and let $c_k$ be as in \eqref{eq:sinc-intro}. For each
+fixed integer $k\ge2$,
+\begin{equation}\label{eq:normalized-moments}
+ n\int_\T u_B^k\le c_k+o_k(1)\quad(n\longrightarrow\infty),
+\end{equation}
+uniformly in $B$. For every $k\ge2$ and every $B$, the left side is at
+most one. For $r\ge1$,
+\begin{equation}\label{eq:even-sinc-formula}
+ I_{2r}=\frac1{(2r-1)!}
+ \sum_{j=0}^r(-1)^j\binom{2r}{j}(r-j)^{2r-1}.
+\end{equation}
+\end{corollary}
+\begin{proof}
+For the interval polynomial $D_n(t)=\sum_{j=0}^{n-1}e(jt)$, change variables
+$x=nt$ on $[-1/2,1/2]$. The rescaled integrand is
+\[
+ \left|\frac{\sin\pi x}{n\sin(\pi x/n)}\right|^{2r}
+ \one_{[-n/2,n/2]}(x).
+\]
+It converges pointwise to $|\sin(\pi x)/(\pi x)|^{2r}$ and is bounded
+by a constant times $\min(1,|x|^{-2r})$. Dominated convergence and
+Proposition~\ref{prop:moments} prove \eqref{eq:normalized-moments} for even
+$k$. Cauchy--Schwarz between the adjacent even moments gives the odd
+case. The universal bound follows from $0\le u_B\le1$ and
+$n\int u_B^2=1$.
+
+For completeness, the coefficient on the right of \eqref{eq:even-max}
+equals
+\[
+ \sum_{j=0}^{r-1}(-1)^j\binom{2r}{j}
+ \binom{(r-j)n+r-1}{2r-1},
+\]
+where binomial coefficients with too small a top entry are interpreted
+as zero. Divide by $n^{2r-1}$ and let $n\to\infty$. Each term has the
+limit $(r-j)^{2r-1}/(2r-1)!$. The additional $j=r$ term in
+\eqref{eq:even-sinc-formula} vanishes. This proves the formula and also
+shows directly that the limiting moment constants are rational.
+\end{proof}
+
+\Needspace{7\baselineskip}
+\section{Outer multipliers and the improved constant}\label{sec:constant-proof}
+
+\subsection{An exact pointwise budget}
+
+We work with multipliers whose Fourier support is nonpositive. This
+orientation is convenient for increasing initial segments. We use standard
+Hardy-space boundary convergence as in Duren~\cite{Duren}. The following
+construction is the boundary-value form of an outer function, reflected
+from the usual analytic convention.
+
+\begin{lemma}[Outer damping]\label{lem:outer}
+Let $0<a<1$, and let $u:\T\to[0,1]$ be measurable. There is an
+$L^\infty$ function $M$ with
+\begin{equation}\label{eq:outer-data}
+ \supp\widehat M\subseteq\Z_{\le0},\qquad
+ |M|=1-au\ \text{a.e.},\qquad
+ \widehat M(0)=\exp\!\left(\int_\T\log(1-au)\right)>0.
+\end{equation}
+If $M_1,\ldots,M_v$ are such multipliers and $P=\prod_jM_j$, then
+\begin{equation}\label{eq:outer-product-mean}
+ \int_\T P=\prod_j\widehat M_j(0).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Put $\ell=\log(1-au)$, a real bounded function. For $0<\rho<1$ define
+\[
+ M_\rho(t)=\exp\!\left(\widehat\ell(0)
+       +2\sum_{k<0}\widehat\ell(k)\rho^{|k|}e(kt)\right).
+\]
+The series converges absolutely for each $\rho$. Its real part before
+exponentiation is the Poisson integral of $\ell$, so
+$1-a\le |M_\rho|\le1$. These are the radial values of a bounded analytic
+function in the reflected disc. The radial boundary function $M$ exists
+almost everywhere and in every finite $L^p$. Poisson convergence gives
+$|M|=e^\ell=1-au$, while its constant coefficient is
+$e^{\widehat\ell(0)}$. This proves \eqref{eq:outer-data}. Products are
+again bounded reflected-analytic functions, and their values at the
+origin multiply. Equivalently, radial approximation followed by
+$L^1$ convergence proves \eqref{eq:outer-product-mean}.
+\end{proof}
+
+For a finite nonempty $B$, let $M_{a,B}$ denote this multiplier for
+$u_B=|F_B|/|B|$. Whenever $|G|\le1$, the update
+\begin{equation}\label{eq:outer-update}
+ G\longmapsto GM_{a,B}+aF_B/|B|
+\end{equation}
+preserves the bound one, because the two summands have total modulus at
+most $(1-au_B)+au_B=1$. Unlike an exponential majorant for the modulus,
+this update leaves no unused pointwise room.
+
+\subsection{Ordered pairing and the whole-product error}
+
+Write $A=\{a_1<\cdots<a_N\}$ and let $A_i$ be increasing initial
+segments of sizes $n_i$. For now the number of segments is arbitrary.
+Set $M_i=M_{a,A_i}$ and
+\begin{equation}\label{eq:test-function}
+ P_i=\prod_{j>i}M_j,\qquad
+ G=a\sum_i\frac{F_{A_i}}{n_i}P_i.
+\end{equation}
+Iterating \eqref{eq:outer-update} from zero proves $\norm G_\infty\le1$.
+The frequency orientation gives the following exact localization of the
+pairing.
+
+\begin{lemma}[The initial-segment pairing]\label{lem:prefix-pairing}
+For every initial segment $A_i$ and every $P$ with nonpositive Fourier
+support,
+\begin{equation}\label{eq:prefix-error}
+ \left|\ip{F_A}{(F_{A_i}/n_i)P}-1\right|
+ \le
+ \left(\frac{E(A_i)+n_i^2}{2n_i^2}\right)^{1/2}
+ \norm{P-1}_2.
+\end{equation}
+Here $P$ may be any $L^2$ function for which the displayed pairing is
+formed; in particular it may be the bounded product $P_i$.
+\end{lemma}
+\begin{proof}
+Let $p_s=\widehat P(s)$. In the pairing, a coefficient $p_s$ can occur
+only when $a=b+s$, with $a\in A$, $b\in A_i$, and $s\le0$. Then
+$a\le b$, so the initial-segment property implies $a\in A_i$.
+Consequently the pairing is unchanged if $F_A$ is replaced by $F_{A_i}$.
+For $s\in\Z$ write
+\[
+ d_s=\frac1{n_i}\#\{(a,b)\in A_i^2:a-b=s\}.
+\]
+Then $d_0=1$, $d_s=d_{-s}$, and
+$\sum_sd_s^2=E(A_i)/n_i^2$. Subtracting the contribution of the constant
+function $P=1$, Cauchy--Schwarz on $s\le0$ gives
+\[
+ \left|\sum_{s\le0}d_s\overline{(p_s-\one_{s=0})}\right|
+ \le\left(\sum_{s\le0}d_s^2\right)^{1/2}\norm{P-1}_2.
+\]
+The sum of squares in the last expression is
+$(E(A_i)/n_i^2+1)/2$, as claimed. All sums involving $d_s$ are finite,
+so no issue of pointwise Fourier convergence arises.
+\end{proof}
+
+Define, for $0\le x\le1$,
+\begin{equation}\label{eq:h-q}
+ h_a(x)=a^2x^2-2ax-2\log(1-ax),\qquad
+ q_a(x)=2ax-a^2x^2.
+\end{equation}
+The function $h_a$ has the positive power series
+\begin{equation}\label{eq:h-expansion}
+ h_a(x)=2a^2x^2+2\sum_{k\ge3}\frac{a^kx^k}{k}.
+\end{equation}
+
+\begin{lemma}[Whole-product estimate]\label{lem:whole-product}
+Let $M_j$ be the multipliers in Lemma~\ref{lem:outer}, associated to
+$u_j:\T\to[0,1]$, and put $P=\prod_jM_j$. Then
+\begin{equation}\label{eq:whole-product}
+ \norm{P-1}_2^2
+ \le\sum_j\int_\T h_a(u_j)
+       +\sum_{j<k}\int_\T q_a(u_j)q_a(u_k).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Set
+\[
+ W=\prod_j(1-au_j),\qquad
+ S=\sum_j\int_\T-\log(1-au_j).
+\]
+By \eqref{eq:outer-product-mean}, $\int P=e^{-S}$, a positive real
+number. Hence
+\begin{equation}\label{eq:product-identity}
+ \norm{P-1}_2^2=\int_\T W^2+1-2e^{-S}.
+\end{equation}
+We have $W^2=\prod_j(1-q_a(u_j))$ and $0\le q_a(u_j)\le1$. The second
+Bonferroni inequality gives the pointwise upper bound
+\[
+ W^2\le1-\sum_jq_a(u_j)+\sum_{j<k}q_a(u_j)q_a(u_k).
+\]
+For instance, this is the usual two-term bound for the probability that
+none of independent events of probabilities $q_a(u_j)$ occurs, applied
+at a fixed point of $\T$. Since $1-e^{-S}\le S$, substitution in
+\eqref{eq:product-identity} proves \eqref{eq:whole-product}, using
+$-q_a(x)-2\log(1-ax)=h_a(x)$.
+\end{proof}
+
+The point of \eqref{eq:whole-product} is not merely the retention of a
+cross term. The quantities $h_a(u)$ and $q_a(u)^2$ depend on the same
+variable. They cannot in general be simultaneously as large as their
+separate uniform upper bounds.
+
+\subsection{A coupled scalar majorant}
+
+We now fix $a=9/10$ and impose the exact scale ratio
+$n_{i+r}=9^rn_i$. For a fixed $i$, let
+\[
+ D_r=n_{i+r}\int_\T h_a(u_{A_{i+r}}),\qquad
+ Q_r=n_{i+r}\int_\T q_a(u_{A_{i+r}})^2,
+ \qquad w_r=3^{-r}.
+\]
+Cauchy--Schwarz on each cross term of \eqref{eq:whole-product} gives
+\begin{equation}\label{eq:weighted-tail}
+ n_i\norm{P_i-1}_2^2
+ \le\sum_rw_r^2D_r+\sum_{r<s}w_rw_s\sqrt{Q_rQ_s}.
+\end{equation}
+All indices here range only over the existing tail of the chain.
+Choose the infinite sequence
+\begin{equation}\label{eq:v-weights}
+ v_1=\frac14,\qquad v_r=3^{-r}\quad(r\ge2),\qquad
+ V_0=\sum_{r\ge1}v_r=\frac5{12},\qquad
+ b_r=\frac12\left(\frac{V_0}{v_r}-1\right).
+\end{equation}
+In particular $b_1=1/3$ and $b_r\ge b_2=11/8$ for $r\ge2$.
+Weighted Cauchy--Schwarz, with the possibly unused $v_r$ retained in
+$V_0$, gives
+\[
+ \left(\sum_rw_r\sqrt{Q_r}\right)^2
+ \le V_0\sum_r\frac{w_r^2Q_r}{v_r}.
+\]
+It follows from \eqref{eq:weighted-tail} that
+\begin{equation}\label{eq:coupled-tail}
+ n_i\norm{P_i-1}_2^2
+ \le\sum_rw_r^2(D_r+b_rQ_r).
+\end{equation}
+
+\begin{lemma}[Scalar coupling]\label{lem:scalar}
+Let $a=9/10$. For a nonempty finite integer set $B$, $n=|B|$, put
+$u=|F_B|/n$. If $b\ge11/8$, then
+\begin{equation}\label{eq:scalar-large-b}
+ n\int_\T\bigl(h_a(u)+bq_a(u)^2\bigr)\le(2+4b)a^2.
+\end{equation}
+For $b=1/3$, uniformly as $n\to\infty$,
+\begin{equation}\label{eq:scalar-first}
+ n\int_\T\bigl(h_a(u)+\tfrac13q_a(u)^2\bigr)
+ \le\frac{10a^2}{3}+\Delta_a+o(1),
+\end{equation}
+where
+\begin{equation}\label{eq:Delta}
+ \Delta_a=\frac23\left(\frac{5a^4}{6}-\frac{2a^3}{3}\right)
+                 +2\sum_{k\ge5}\frac{c_ka^k}{k}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+By Parseval, $d\nu=nu^2\,dt$ is a probability measure. Define
+\[
+ \Phi_b(x)=\frac{h_a(x)}{x^2}+b(2a-a^2x)^2\quad(x>0),\qquad
+ \Phi_b(0)=(2+4b)a^2.
+\]
+The left sides under consideration equal $\int\Phi_b(u)\,d\nu$.
+The positive series \eqref{eq:h-expansion}, together with the convex
+quadratic in this definition, shows that $\Phi_b$ is convex on $[0,1]$
+for every $b\ge0$. Its endpoint difference is
+\begin{equation}\label{eq:Phi-endpoints}
+ \Phi_b(1)-\Phi_b(0)
+ =-a^2-2a-2\log(1-a)-b(4a^3-a^4).
+\end{equation}
+For $a=9/10$ and $b\ge11/8$ this is negative. This can be checked with
+rational arithmetic and $\log10<5/2$; a sharper enclosure is recorded in
+Appendix~\ref{app:certificate}. Convexity therefore gives
+$\Phi_b(x)\le\Phi_b(0)$ throughout $[0,1]$, proving
+\eqref{eq:scalar-large-b}.
+
+For $b=1/3$, expansion gives
+\[
+ \Phi_{1/3}(x)=\frac{10a^2}{3}-\frac{2a^3}{3}x
+       +\frac{5a^4}{6}x^2
+       +2\sum_{k\ge5}\frac{a^kx^{k-2}}{k}.
+\]
+As $x\ge x^2$ on $[0,1]$ and
+$5a^4/6-2a^3/3>0$ for our value of $a$,
+\[
+ \Phi_{1/3}(x)\le\frac{10a^2}{3}
+ +\left(\frac{5a^4}{6}-\frac{2a^3}{3}\right)x^2
+ +2\sum_{k\ge5}\frac{a^kx^{k-2}}{k}.
+\]
+Integrating against $\nu$ and applying
+Corollary~\ref{cor:normalized-moments}, with $c_4=I_4=2/3$, proves
+\eqref{eq:scalar-first}. To justify the infinite sum uniformly in $B$,
+first truncate at a fixed index. The remaining contribution is at most
+$2\sum_{k>L}a^k/k$, since $n\int u^k\le1$. This tends to zero independently
+of $B$, after which the finite number of moment limits may be taken.
+\end{proof}
+
+\begin{proposition}[Uniform tail budget]\label{prop:tail-budget}
+For the ratio-nine chain above, as its smallest size tends to infinity,
+\begin{equation}\label{eq:tail-budget}
+ n_i\norm{P_i-1}_2^2\le\mathcal E_{9/10}+o(1)
+\end{equation}
+uniformly in $i$, in the length of the chain, and in the underlying set.
+\end{proposition}
+\begin{proof}
+Apply Lemma~\ref{lem:scalar} in \eqref{eq:coupled-tail}. All terms with
+$r\ge2$ are bounded without error, and only $r=1$ uses a moment limit.
+If there is no tail, the result is immediate. Otherwise the required
+moment error is uniform once $n_{i+1}$ tends to infinity. The constant
+part is bounded by the infinite sum
+\[
+ a^2\sum_{r\ge1}w_r^2(2+4b_r)
+ =2a^2V_0\sum_{r\ge1}\frac{w_r^2}{v_r}
+ =2a^2\frac5{12}\left(\frac49+\frac16\right)
+ =\frac{55a^2}{108}.
+\]
+The first-level correction is $w_1^2\Delta_a=\Delta_a/9$. This is exactly
+$\mathcal E_a$ from \eqref{eq:E-intro}. Adding unused nonnegative terms
+causes no difficulty for a finite tail.
+\end{proof}
+
+\subsection{Completion of the quantitative theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm:constant}]
+For large $N$, put $n_1=\lceil\log N\rceil$ and
+$n_i=9^{i-1}n_1$ for $1\le i\le J$, where $J$ is maximal with
+$n_J\le N$. Thus
+\begin{equation}\label{eq:chain-length}
+ J=\frac{\log N-\log\log N}{\log9}+O(1).
+\end{equation}
+Let $A_i$ be the first $n_i$ elements of $A$, and use the bounded test
+$G$ in \eqref{eq:test-function}. The interval energy bound
+\eqref{eq:energy-max} gives
+\[
+ \frac{E(A_i)+n_i^2}{2n_i^2}
+ \le\frac{n_i}{3}+\frac12+\frac1{6n_i}.
+\]
+Together with Lemma~\ref{lem:prefix-pairing} and
+Proposition~\ref{prop:tail-budget}, this implies, uniformly in $i$,
+\[
+ \Rea\ip{F_A}{(F_{A_i}/n_i)P_i}
+ \ge1-\sqrt{\mathcal E_{9/10}/3}-o(1).
+\]
+Because $\norm G_\infty\le1$, summing and using
+\eqref{eq:chain-length} yields
+\[
+ \La(A)\ge\Rea\ip{F_A}G
+ \ge\left[\frac{9}{10\log9}
+       \left(1-\sqrt{\mathcal E_{9/10}/3}\right)-o(1)\right]\log N.
+\]
+Every error used here depends only on $N$, not on the diameter or
+arithmetic arrangement of $A$. Finally, Appendix~\ref{app:certificate}
+proves with rational bounds that
+\[
+ \mathcal E_{9/10}<0.479084457020255861,
+ \qquad c_*>0.2459209213577253.
+\]
+In particular $c_*>0.2459209$, as stated.
+\end{proof}
+
+\begin{remark}
+The last theorem is an asymptotic leading-coefficient statement. It does
+not assert the same decimal times $\log N$ with no error for every small
+$N$, nor does it optimize the entire class of outer recursions. Its
+frequency support still has a one-sided endpoint restriction. The
+classical Landau bound in Appendix~\ref{app:landau} explains why
+optimizing only within that final spectral class cannot reach $4/\pi^2$.
+\end{remark}
+
+\Needspace{7\baselineskip}
+\section{Hereditary energy and repeated structural extraction}\label{sec:hered}
+
+The structural proof needs an invariant that survives deletion. A
+bound for the Fourier norm of an original set need not survive when a
+subset is removed. An energy inequality formulated for \emph{every}
+remaining subset does survive, and this is the purpose of the next
+lemma.
+
+\begin{lemma}[Hereditary energy gives an almost-covering]\label{lem:peeling}
+Let $X$ be a nonempty finite subset of an abelian group, $|X|=R$, and
+suppose that, for some $0<\eta\le1$,
+\begin{equation}\label{eq:hereditary-energy}
+ E(Y)\ge\eta\frac{|Y|^4}{R}
+ \qquad(\varnothing\ne Y\subseteq X).
+\end{equation}
+For every $0<\delta<1$, there are pairwise disjoint subsets
+$X_1,\ldots,X_J\subseteq X$ such that
+\begin{align}
+ \left|X\setminus\bigcup_{j=1}^JX_j\right|&<\delta R,
+ &J&\le C\eta^{-C}\delta^{-C},\label{eq:peeling-cover}\\
+ |X_j|&\ge c\eta^C\delta^C R,
+ &|X_j+X_j|&\le C\eta^{-C}\delta^{-C}|X_j|.
+ \label{eq:peeling-size}
+\end{align}
+All constants here are absolute.
+\end{lemma}
+\begin{proof}
+Take the polynomial constants from Theorem~\ref{thm:BSG}. If the current
+remainder $Y$ has $|Y|\ge\delta R$, then
+\eqref{eq:hereditary-energy} gives
+$E(Y)\ge\eta\delta|Y|^3$. BSG produces $Z\subseteq Y$ of size at least
+$c(\eta\delta)^C|Y|$, and with doubling at most
+$C(\eta\delta)^{-C}$. In particular the number removed is at least
+$c(\eta\delta)^C\delta R$. Remove this $Z$ and repeat. The selected sets
+are disjoint, every step removes a fixed parameter-dependent fraction
+of the \emph{original} size $R$, and the process stops after a bounded
+number of steps. Increasing the absolute exponent absorbs the additional
+factor of $\delta$ in the size and step bounds. The only hypothesis
+used at a later step is \eqref{eq:hereditary-energy} for its remainder.
+\end{proof}
+
+\begin{lemma}[A constant spectral budget gives hereditary energy]
+\label{lem:spectral-hereditary}
+Let $X$ be a nonempty finite subset of an abelian group, let $R=|X|$,
+and put $S=\norm{F_X}_1$ on its compact dual. For every $Y\subseteq X$,
+\begin{equation}\label{eq:spectral-hereditary}
+ E(Y)\ge\frac{|Y|^4}{S^2R}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The claim is immediate for $Y=\varnothing$. Otherwise
+$\ip{F_X}{F_Y}=|Y|$. Weighted Cauchy--Schwarz and then ordinary
+Cauchy--Schwarz imply
+\begin{align*}
+ |Y|^2
+ &\le\left(\int|F_X||F_Y|\right)^2\\
+ &\le\left(\int|F_X|\right)
+       \left(\int|F_X||F_Y|^2\right)\\
+ &\le S\left(\int|F_X|^2\right)^{1/2}
+          \left(\int|F_Y|^4\right)^{1/2}
+ =S\sqrt R\sqrt{E(Y)}.
+\end{align*}
+Squaring and rearranging proves the result. In particular, this argument
+uses no order on the group and applies on a finite cyclic group.
+\end{proof}
+
+Applied directly with $S=K\log N$, the last lemma still loses powers of
+$\log N$. Its role below is to act \emph{after} a long integer direction
+has been removed, when the residual spectral budget is a constant.
+For separated blocks, we instead obtain \eqref{eq:hereditary-energy}
+from bounded nonlinear amplification.
+
+\Needspace{7\baselineskip}
+\section{Bounded amplification and the energy of integer block labels}
+\label{sec:majority}
+
+\subsection{A positive density of balanced correlations}
+
+\begin{lemma}[Dense mixed correlations]\label{lem:majority}
+Let $F\in L^1(\T)$, $L=\norm F_1>0$, and let
+$\Phi_1,\ldots,\Phi_r$ satisfy
+\[
+ \norm{\Phi_i}_\infty\le1,\qquad
+ \Rea\ip F{\Phi_i}\ge\kappa>0.
+\]
+Put $T=L/\kappa\ge1$, and let $m$ be the smallest odd integer at least
+$64T^2$. If $r\ge m$, then there is an odd integer
+$k=2s-1$, $3\le k\le m$, such that at least $e^{-CT^2}r^k$ ordered
+$k$-tuples of distinct indices satisfy
+\begin{equation}\label{eq:good-correlations}
+ \left|\ip F{\Phi_{i_1}\cdots\Phi_{i_s}
+       \overline{\Phi_{i_{s+1}}\cdots\Phi_{i_k}}}\right|
+       \ge e^{-CT^2}\kappa.
+\end{equation}
+No arithmetic assumption on the test functions is made.
+\end{lemma}
+\begin{proof}
+For odd $m$, let $\Maj_m:\{-1,1\}^m\to\{-1,1\}$ be the sign of the
+sum of its coordinates, and consider its multi-affine extension
+\[
+ P_m(t_1,\ldots,t_m)=
+ \sum_{S\subseteq[m]}\widehat{\Maj_m}(S)\prod_{j\in S}t_j.
+\]
+This extension is bounded in absolute value by one throughout
+$[-1,1]^m$: it is the expectation of Boolean majority under independent
+signs whose expectations are the prescribed $t_j$. Only odd degrees
+occur. Each first-degree coefficient equals
+\[
+ a_m=2^{-(m-1)}\binom{m-1}{(m-1)/2}\ge(2m)^{-1/2}.
+\]
+Indeed the other $m-1$ signs contribute to the correlation with one
+coordinate exactly when they sum to zero. The displayed lower bound
+follows from the elementary central-binomial estimate. Boolean Parseval
+and Cauchy--Schwarz also give
+\begin{equation}\label{eq:walsh-mass}
+ B_m:=\sum_{S\subseteq[m]}|\widehat{\Maj_m}(S)|\le2^{m/2}.
+\end{equation}
+
+To handle complex functions without losing the balance of conjugates,
+work on $\T^2$ and put
+\[
+ H(x,t)=2\Rea(e(t)F(x)),\qquad
+ \psi_i(x,t)=\Rea(e(t)\Phi_i(x)).
+\]
+Then $|\psi_i|\le1$ and direct integration in $t$ gives
+\begin{equation}\label{eq:phase-lift}
+ \norm H_1=\frac4\pi L=:L_*,\qquad
+ \ip H{\psi_i}=\Rea\ip F{\Phi_i}\ge\kappa.
+\end{equation}
+For any injection $\iota:[m]\to[r]$, pair $H$ with
+$P_m(\psi_{\iota(1)},\ldots,\psi_{\iota(m)})$. The full pairing has
+absolute value at most $L_*$. Its linear contribution is at least
+$A_m\kappa$, where
+\[
+ A_m=ma_m\ge\sqrt{m/2}\ge2L_*/\kappa.
+\]
+Average over all injections. For an odd degree $k$, let
+\[
+ J_k=\E_{i_1,\ldots,i_k\,\mathrm{distinct}}
+           \ip H{\psi_{i_1}\cdots\psi_{i_k}}.
+\]
+Every monomial of degree $k$ has the same averaged pairing $J_k$.
+The higher terms must offset at least $A_m\kappa-L_*\ge A_m\kappa/2$.
+By \eqref{eq:walsh-mass}, some odd $k\ge3$ therefore satisfies
+\begin{equation}\label{eq:Jk}
+ |J_k|\ge\frac{A_m}{2B_m}\kappa=:\tau\kappa,
+ \qquad \tau\ge e^{-Cm}.
+\end{equation}
+
+Write $k=2s-1$. Expanding the real parts and integrating in the extra
+phase yields the exact identity
+\begin{equation}\label{eq:balanced-identity}
+ \ip H{\prod_{j=1}^k\psi_{i_j}}
+ =2^{1-k}\Rea\sum_{\substack{U\subseteq[k]\\|U|=s}}
+  \ip F{\prod_{j\in U}\Phi_{i_j}
+                   \prod_{j\notin U}\overline{\Phi_{i_j}}}.
+\end{equation}
+Only products with one more unconjugated factor survive. After
+averaging, all the terms on the right agree by permutation symmetry.
+Since $2^{1-k}\binom{k}{s}\le1$, \eqref{eq:Jk} implies
+\[
+ \E_{\mathrm{distinct}}
+ \left|\ip F{\Phi_{i_1}\cdots\Phi_{i_s}
+       \overline{\Phi_{i_{s+1}}\cdots\Phi_{i_k}}}\right|
+ \ge\tau\kappa.
+\]
+Each absolute pairing is at most $L=T\kappa$. Hence at least a
+$\tau/(2T)$ fraction of the distinct tuples have absolute pairing at
+least $\tau\kappa/2$. Finally,
+\[
+ \frac{(r)_k}{r^k}\ge\frac{k!}{k^k}\ge e^{-k}
+ \qquad(r\ge k),
+\]
+where $(r)_k=r(r-1)\cdots(r-k+1)$. Since $k\le m\ll T^2$, all fixed
+factors and the factor $T$ can be absorbed into $e^{CT^2}$. This proves
+\eqref{eq:good-correlations} with an absolute $C$.
+\end{proof}
+
+The distinction between a single nonzero mixed correlation and a positive
+density of such correlations is essential. The latter can be counted
+as additive relations. The argument has also retained all higher terms
+of the bounded polynomial; it has not presumed that a cubic correction
+alone captures the obstruction.
+
+\subsection{Finite-band certificates for actual integer blocks}
+
+Let $C$ have the exact representation
+\eqref{eq:terminal-packet}, initially without the density conditions
+in \eqref{eq:terminal-packet-conditions}. We require only $D\ge1$,
+$C_i\ne\varnothing$, and separation $|b_i-b_j|>4D$.
+
+\begin{lemma}[A finite-band certificate]\label{lem:band}
+For every $B\subseteq[-D,D]\cap\Z$ there is a trigonometric polynomial
+$\psi_B$ such that
+\[
+ \norm{\psi_B}_\infty\le1,\qquad
+ \supp\widehat{\psi_B}\subseteq[-2D,2D],\qquad
+ \ip{F_B}{\psi_B}=\frac13\La(B).
+\]
+\end{lemma}
+\begin{proof}
+Let $\mathcal F_D$ be the Fej\'er kernel whose coefficients are
+$(1-|n|/D)_+$, and put $V_D=2\mathcal F_{2D}-\mathcal F_D$.
+Its coefficients equal one on $[-D,D]$, vanish outside $(-2D,2D)$,
+and $\norm{V_D}_1\le3$. Define the phase of $F_B$ to be zero at its
+zeros, and put
+\[
+ \psi_B=\frac13 V_D*\frac{F_B}{|F_B|}.
+\]
+Convolution gives the $L^\infty$ and support assertions. Since $V_D$ is
+real and even and has coefficient one at every frequency of $B$,
+\[
+ \ip{F_B}{\psi_B}
+ =\frac13\ip{V_D*F_B}{F_B/|F_B|}
+ =\frac13\int|F_B|.
+\]
+The empty-set case is covered by the zero function.
+\end{proof}
+
+Take $\Phi_i=e(b_it)\psi_{C_i}$. Its support lies in
+$b_i+[-2D,2D]$. The separation of the centres implies that no other
+block $b_j+C_j$ meets this support. Consequently
+\begin{equation}\label{eq:ambient-certificate}
+ \ip{F_C}{\Phi_i}=\frac13\La(C_i).
+\end{equation}
+Let
+\begin{equation}\label{eq:label-def}
+ \ell_i=\lfloor b_i/D\rfloor,
+ \quad \Lambda=\{\ell_i:1\le i\le R\},
+ \quad\kappa=\frac13\min_i\La(C_i),
+ \quad T=\La(C)/\kappa.
+\end{equation}
+The labels are distinct and $T\ge1$ by \eqref{eq:ambient-certificate}.
+
+\begin{proposition}[Hereditary energy of the labels]\label{prop:packet-hered}
+For every nonempty $S\subseteq\Lambda$,
+\begin{equation}\label{eq:packet-hered}
+ E(S)\ge e^{-CT^2}\frac{|S|^4}{R}.
+\end{equation}
+The parameter $T$ refers to the full original target $C$ and is the same
+for every $S$.
+\end{proposition}
+\begin{proof}
+Write $r=|S|$, and let $m$ be as in Lemma~\ref{lem:majority}. If $r<m$,
+then $E(S)\ge r^2$ suffices: because $R\ge r$ and $m\ll T^2$, an
+absolute enlargement of $C$ ensures $e^{-CT^2}r^2\le R$.
+Assume therefore that $r\ge m$. Apply Lemma~\ref{lem:majority} to the
+certificates indexed by $S$, keeping $F_C$ as target. For some
+$k=2s-1\ll T^2$, at least $e^{-CT^2}r^{2s-1}$ ordered distinct tuples
+have nonzero balanced correlation.
+
+The Fourier support of such a balanced product lies in
+\[
+ b_{i_1}+\cdots+b_{i_s}-b_{i_{s+1}}-\cdots-b_{i_k}
+                    +[-2kD,2kD].
+\]
+Nonzero correlation with $F_C$ forces this interval to contain a point
+of one of the original blocks. Hence, for some $j\in\{1,\ldots,R\}$,
+\[
+ |b_{i_1}+\cdots+b_{i_s}-b_{i_{s+1}}-\cdots-b_{i_k}-b_j|
+ \le(2k+1)D.
+\]
+The witness $j$ is not required to have $\ell_j\in S$. Writing
+$b_i=D\ell_i+r_i$, $0\le r_i<D$, gives an integer $t$ with
+\begin{equation}\label{eq:carry-relation}
+ \ell_{i_1}+\cdots+\ell_{i_s}
+ -\ell_{i_{s+1}}-\cdots-\ell_{i_k}-\ell_j=t,
+ \qquad |t|\le4k.
+\end{equation}
+Indeed the rounding error contains $k+1$ remainders, so $(2k+1)+(k+1)$
+provides a sufficient bound for $k\ge3$. Choose one witness for each
+good tuple. Different tuples still give different ordered solutions
+when the witness is included. With $r_s=\one_S^{*s}$, their count yields
+\begin{equation}\label{eq:ambient-relations}
+ \sum_{|t|\le4k}\sum_x r_s(x)
+           (\one_S^{*(s-1)}*\one_\Lambda)(x+t)
+ \ge e^{-CT^2}r^{2s-1}.
+\end{equation}
+Changing $t$ to $-t$ if necessary gives exactly this convention.
+
+By Fourier inversion and then H\"older, each inner shifted pairing is
+bounded above by
+\begin{align*}
+ \int_\T|F_S|^{2s-1}|F_\Lambda|
+ &\le r^{2s-4}\int_\T|F_S|^3|F_\Lambda|\\
+ &\le r^{2s-4}E(S)^{3/4}E(\Lambda)^{1/4}\\
+ &\le r^{2s-4}E(S)^{3/4}R^{3/4}.
+\end{align*}
+Here $s\ge2$, and the last inequality uses the elementary
+$E(\Lambda)\le R^3$. Combining with \eqref{eq:ambient-relations},
+absorbing $8k+1$ into the exponential constant, and taking the power
+$4/3$ proves \eqref{eq:packet-hered}.
+\end{proof}
+
+In particular, the high-order correlations have been reduced to ordinary
+fourth-order energy. No assertion that the floor map is a Freiman
+isomorphism is used: the bounded integer error in
+\eqref{eq:carry-relation} is counted rather than discarded.
+
+\begin{theorem}[Almost-covering for dense separated blocks]
+\label{thm:packet-cover}
+Fix $K_0\ge1$, $0<\beta\le1$, $\Delta\ge1$, and $0<\eps<1$.
+If a set $C$ satisfies \eqref{eq:terminal-packet}--
+\eqref{eq:terminal-packet-conditions}, $|C|=n\ge2$, and
+$\La(C)\le K_0\log n$, then all but at most $\eps n$ points of $C$
+are covered by boundedly many pairwise disjoint subsets, each of size
+at least $cn$ and doubling at most $C_1$. The positive constants and
+the number of subsets depend only on $K_0,\beta,\Delta,\eps$.
+\end{theorem}
+\begin{proof}
+The weighted MPS inequality gives
+\[
+ \kappa\ge c\log(M+1)\ge c\beta\log n,
+ \qquad T\le CK_0/\beta.
+\]
+Apply Lemma~\ref{lem:peeling} to \eqref{eq:packet-hered}, with
+$\delta=\eps/(6\Delta)$. The omitted labels number less than
+$\delta R$. Since $|C_i|\le2D+1\le3\Delta M$ and $n\ge MR$,
+their original blocks contain at most
+\[
+ (2D+1)\delta R\le3\Delta\delta n\le\eps n/2
+\]
+points. For each selected label set $S_j$, take $B_j$ to be the union
+of all its original blocks. The $B_j$ are disjoint and
+$|B_j|\ge M|S_j|$. Also $n\le3\Delta MR$, so the lower size bound for
+$S_j$ gives $|B_j|\ge cn$.
+
+If $|S_j+S_j|\le Q|S_j|$, each point in a corresponding integer block
+has the form $D\ell+u$ with $u\in[-D,2D]\cap\Z$. Thus
+\[
+ |B_j+B_j|\le(6D+1)|S_j+S_j|
+ \le7\Delta Q|B_j|.
+\]
+The label constants are bounded in the stated parameters, and so are
+all the constants in the conclusion. In particular no estimate for
+$\La$ of a deleted-block remainder was required.
+\end{proof}
+
+\Needspace{7\baselineskip}
+\section{Integer boundaries and long arithmetic blocks}\label{sec:boundary}
+
+The second local argument converts a logarithmic budget into a constant
+spectral budget. The relevant object is an integer-valued boundary on a
+cyclic group times $\Z$, rather than a collection of independently
+chosen analytic vectors.
+
+\subsection{Extracting the boundary norm}
+
+Let $q,M\ge1$ and let
+$\varnothing\ne\mathcal C\subset(\Z/q\Z)\times\Z$ be finite, of size
+$V$. Initially no aspect condition is imposed. Residues $b$ are always
+represented by $0\le b<q$. Put $A=A_M(\mathcal C)$ as in
+\eqref{eq:terminal-inflation}, and define
+\begin{align}
+ h(b,u)&=\one_{\mathcal C}(b,u)-\one_{\mathcal C}(b,u-1),
+ &H&=\sum_{b,u}|h(b,u)|^2\le2V,\label{eq:boundary-def}\\
+ \mathscr H(j,s)&=\sum_{b,u}h(b,u)e(bj/q+us),
+ &S&=\frac1q\sum_{j=0}^{q-1}\int_\T|\mathscr H(j,s)|\,ds.
+ \label{eq:boundary-norm}
+\end{align}
+The function $h$ is nonzero, takes values in $\{-1,0,1\}$, and has zero
+sum in $u$ for every $b$. Fourier inversion and Parseval give
+\begin{equation}\label{eq:S-bounds}
+ 1\le S\le\sqrt H.
+\end{equation}
+
+\begin{proposition}[Uniform boundary extraction]\label{prop:boundary}
+For every $q,M,\mathcal C$ as above,
+\begin{equation}\label{eq:boundary-extraction}
+ \La(A_M(\mathcal C))
+ \ge\frac S\pi\log\frac{MS}{\sqrt H}-4S.
+\end{equation}
+For fixed $q,\mathcal C$, as $M\to\infty$ one also has
+\begin{equation}\label{eq:boundary-asymptotic}
+ \La(A_M(\mathcal C))=\frac S\pi\log M+O_{q,\mathcal C}(1).
+\end{equation}
+\end{proposition}
+\begin{proof}
+The finite geometric series for each cell gives the exact identity
+\begin{equation}\label{eq:boundary-identity}
+ (1-e(q\theta))F_A(\theta)
+ =\sum_{b,u}h(b,u)e(b\theta+qMu\theta).
+\end{equation}
+Partition the circle by writing $\theta=(j+t)/q$, with
+$0\le j<q$ and $-1/2\le t<1/2$. Define
+\[
+ W(t,s)=\frac1q\sum_{j=0}^{q-1}
+       \left|\sum_{b,u}h(b,u)e(b(j+t)/q+us)\right|.
+\]
+Equation \eqref{eq:boundary-identity} yields
+\begin{equation}\label{eq:boundary-integral}
+ \La(A)=\int_{-1/2}^{1/2}
+            \frac{W(t,Mt)}{2|\sin\pi t|}\,dt.
+\end{equation}
+The values at the isolated zeros of the denominator are interpreted
+by the original identity and do not affect the integral.
+
+Let
+\[
+ W_0(s)=W(0,s),\qquad
+ Q(s)=\left(\sum_b\left|\sum_uh(b,u)e(us)\right|^2\right)^{1/2}.
+\]
+For fixed $s$, the difference inside $W(t,s)$ and $W_0(s)$ is a
+Fourier sum in $j$ with coefficients
+$(e(bt/q)-1)\sum_uh(b,u)e(us)$. The triangle inequality, discrete
+Parseval, and $|e(bt/q)-1|\le2\pi|t|$ prove
+\begin{equation}\label{eq:boundary-freezing}
+ |W(t,s)-W_0(s)|\le2\pi|t|Q(s).
+\end{equation}
+Since $h$ is real, $W_0,Q$ are even and one-periodic, and
+$W(-t,-s)=W(t,s)$ after conjugation and reindexing $j$.
+Furthermore
+\begin{equation}\label{eq:boundary-averages}
+ \int_0^1W_0(s)\,ds=S,\qquad
+ \int_0^1Q(s)\,ds\le\sqrt H.
+\end{equation}
+The second assertion follows from Cauchy--Schwarz and Parseval in $s$.
+
+Restrict \eqref{eq:boundary-integral} to $|t|\le a$, where
+$0<a\le1/2$. Since $2t\le\sin\pi t\le\pi t$ for $0\le t\le1/2$,
+\eqref{eq:boundary-freezing} gives
+\begin{equation}\label{eq:boundary-small-arc}
+ \La(A)\ge\frac1\pi\int_0^{Ma}\frac{W_0(u)}u\,du
+              -\pi(a+M^{-1})\sqrt H.
+\end{equation}
+For the error term, split $[0,Ma]$ into complete unit periods and one
+remaining interval; nonnegativity and periodicity bound its integral
+of $Q$ by $(Ma+1)\int_0^1Q$.
+
+A nonnegative one-periodic function of mean $S$ satisfies
+\begin{equation}\label{eq:periodic-harmonic}
+ \int_0^X\frac{W_0(u)}u\,du\ge S(\log X-2)\qquad(X\ge1).
+\end{equation}
+To see this, discard $[0,1]$ and the final incomplete interval. Each
+complete interval $[j,j+1]$, $j\ge1$, contributes at least $S/(j+1)$.
+The elementary harmonic-sum bound proves \eqref{eq:periodic-harmonic}.
+Now choose $a=S/(4\sqrt H)$, which lies in $(0,1/4]$ by
+\eqref{eq:S-bounds}. If $MS/\sqrt H\ge4$, then $Ma\ge1$ and the error
+in \eqref{eq:boundary-small-arc} is at most $\pi S/2$. Hence
+\[
+ \La(A)\ge\frac S\pi\log\frac{MS}{\sqrt H}
+       -\left(\frac{\log4+2}{\pi}+\frac\pi2\right)S,
+\]
+which is stronger than \eqref{eq:boundary-extraction}. If
+$MS/\sqrt H<4$, the right side of \eqref{eq:boundary-extraction} is
+negative, so that inequality is automatic.
+
+For \eqref{eq:boundary-asymptotic}, hold $q,\mathcal C$ fixed. On the
+whole interval $[-1/2,1/2]$, the cruder bound
+$|W(t,s)-W_0(s)|\le2\pi|t|\sum|h|$ has an integrable quotient by
+$|\sin\pi t|$. Replacing $1/(2|\sin\pi t|)$ by $1/(2\pi|t|)$ also
+has bounded integrated error. Thus
+\[
+ \La(A)=\frac1\pi\int_0^{M/2}\frac{W_0(u)}u\,du+O_{q,\mathcal C}(1).
+\]
+The integral near zero is finite: $W_0(0)=0$, because each vertical
+sum of $h$ is zero, and $W_0$ is Lipschitz. The periodic function
+$W_0-S$ has a bounded primitive; integration by parts on $[1,M/2]$
+therefore shows that its contribution divided by $u$ is bounded.
+This proves \eqref{eq:boundary-asymptotic}.
+\end{proof}
+
+\begin{corollary}[A constant boundary budget]\label{cor:boundary-budget}
+Suppose $M\ge V$, $n=MV$ is sufficiently large absolutely, and
+$\La(A_M(\mathcal C))\le K_0\log n$, with $K_0\ge1$. Then
+$S\le CK_0$. More generally, $M\ge V^{1/2+\sigma}$ with fixed
+$0<\sigma\le1/2$ gives $S\le CK_0/\sigma$ once $n$ is sufficiently
+large in terms of $\sigma$.
+\end{corollary}
+\begin{proof}
+Since $H\le2V$ and $S\ge1$, the first aspect condition gives
+\[
+ \log\frac{MS}{\sqrt H}\ge\frac12\log M-\frac12\log2,
+ \qquad\log n\le2\log M.
+\]
+For large $M$, Proposition~\ref{prop:boundary} implies
+$\La(A_M(\mathcal C))\ge(S/(4\pi))\log M$, proving the first assertion.
+The condition $M\ge V$ ensures that $M\to\infty$ as $n\to\infty$.
+For the second assertion use
+\[
+ \log(M/\sqrt V)\ge\frac{2\sigma}{1+2\sigma}\log M,
+ \qquad\log n\le3\log M,
+\]
+and absorb the fixed negative multiple of $S$ once more.
+\end{proof}
+
+\subsection{Integer-valuedness creates shared boundary heights}
+
+\begin{lemma}[Common heights and residual spectra]\label{lem:heights}
+Let $u_1<\cdots<u_v$ be the heights at which $h(\cdot,u)$ is nonzero.
+Then
+\begin{equation}\label{eq:height-count}
+ v\le e^{CS}.
+\end{equation}
+Between consecutive heights, $\mathcal C$ is a slab
+$X_j\times[u_j,u_{j+1})$, with possibly empty
+$X_j\subseteq\Z/q\Z$. The nonempty slabs partition $\mathcal C$, and
+\begin{equation}\label{eq:residue-spectrum}
+ \norm{F_{X_j}}_{L^1(\widehat{\Z/q\Z})}\le vS.
+\end{equation}
+\end{lemma}
+\begin{proof}
+For fixed $a\in\{0,\ldots,q-1\}$, apply
+Theorem~\ref{thm:MPS} in the vertical variable to
+\[
+ \mathscr H(a,s)=\sum_{j=1}^v
+ \left(\sum_bh(b,u_j)e(ba/q)\right)e(u_js).
+\]
+Some displayed coefficients may vanish; the weighted inequality remains
+valid with the original indices. Averaging over $a$ gives
+\[
+ S\ge\cMPS\sum_{j=1}^v\frac1j
+       \norm{F_{h(\cdot,u_j)}}_{L^1(\widehat{\Z/q\Z})}.
+\]
+Each underlying coefficient function is nonzero and integer-valued, so
+its Fourier algebra norm is at least one by inversion. Hence
+$S\ge\cMPS\sum_{j\le v}1/j$, proving \eqref{eq:height-count}.
+
+Extraction of the coefficient at height $u_j$ is contractive:
+\[
+ \frac1q\sum_a\left|\int_\T\mathscr H(a,s)e(-u_js)\,ds\right|
+ \le S.
+\]
+Thus each boundary-height function has finite-group norm at most $S$.
+Telescoping the definition of $h$ shows that, on the vertical interval
+$[u_j,u_{j+1})$, the indicator of $\mathcal C$ is the residue indicator
+\[
+ \one_{X_j}(b)=\sum_{i\le j}h(b,u_i).
+\]
+It is zero before the first and after the last height, because
+$\mathcal C$ is finite. This proves the slab partition and, by the
+triangle inequality, \eqref{eq:residue-spectrum}.
+\end{proof}
+
+It is important that the values of $h$ are integers. Arbitrarily small
+nonzero real coefficients would not impose a cost of at least one at a
+new height. It is also important that the residue group remains cyclic:
+replacing it by independent free coordinates would erase carries.
+
+\begin{lemma}[Lifting doubling with carries]\label{lem:carry-lift}
+Let $X\subseteq\{0,\ldots,q-1\}$ and
+$P=X+q\{a,a+1,\ldots,a+L-1\}$, where $L\ge1$. If
+$|X+X|_{\Z/q\Z}\le Q|X|$, then
+\begin{equation}\label{eq:carry-doubling}
+ |P+P|\le2Q|P|.
+\end{equation}
+\end{lemma}
+\begin{proof}
+For a residue sum write $x_1+x_2=r+q\kappa$ with
+$0\le r<q$ and $\kappa\in\{0,1\}$. The sum of two vertical coordinates
+in $[a,a+L)$ ranges from $2a$ to $2a+2L-2$. Allowing either carry
+produces at most $2L$ values for that residue. Therefore
+$|P+P|\le2L|X+X|_{\Z/q\Z}\le2QL|X|=2Q|P|$.
+\end{proof}
+
+\begin{theorem}[Almost-covering for long block inflations]
+\label{thm:block-cover}
+Fix $K_0\ge1$ and $0<\eps<1$. Let $C=A_M(\mathcal C)$ with
+$M\ge V$, $n=MV$ sufficiently large, and $\La(C)\le K_0\log n$.
+Then all but at most $\eps n$ points of $C$ are covered by boundedly
+many disjoint subsets, each of size at least $cn$ and doubling at most
+$C_1$. All constants depend only on $K_0,\eps$.
+\end{theorem}
+\begin{proof}
+Corollary~\ref{cor:boundary-budget} and Lemma~\ref{lem:heights} give
+$S\le CK_0$, $v\le e^{CK_0}$, and a partition into at most $v$
+nonempty arithmetic slabs
+\[
+ P_j=X_j+q\{a_j,\ldots,a_j+L_j-1\}.
+\]
+Here $L_j=M(u_{j+1}-u_j)$, and the finite-group spectral norm of each
+$X_j$ is at most $vS$, hence bounded only in terms of $K_0$.
+
+Discard slabs of size less than $\eps n/(4v)$, losing at most
+$\eps n/4$ points. For a remaining residue set $X_j$, apply
+Lemma~\ref{lem:spectral-hereditary} and then
+Lemma~\ref{lem:peeling}, with $\delta=\eps/4$. This covers all but a
+$\delta$ proportion of its residues by boundedly many disjoint subsets
+$X_{j,l}$, each of positive parameter-dependent relative size and
+bounded doubling in $\Z/q\Z$. Lift each one over the entire vertical
+interval of the slab. The lifted pieces are disjoint,
+Lemma~\ref{lem:carry-lift} bounds their integer doubling, and the
+omitted residue proportion equals the omitted point proportion.
+Since every retained slab has size at least $\eps n/(4v)$, each
+lifted piece is linear in $n$. The additional omitted mass is at most
+$\eps n/4$. This proves the stated conclusion, with room in the error
+budget.
+\end{proof}
+
+\begin{remark}[A stronger representation inside this terminal model]
+Green--Sanders~\cite{GreenSanders} gives an additional description here:
+$\one_C$ is an exact signed sum of $O_{K_0}(1)$ arithmetic-progression
+indicators. Indeed each $\one_{X_j}$ has bounded finite-group algebra
+norm and is a bounded signed sum of coset indicators. A coset in
+$\Z/q\Z$ has representatives
+$r+d\{0,\ldots,q/d-1\}$, $d\mid q$, $0\le r<d$. Its lift over a
+vertical interval $[a,a+L)$ is the single progression
+\[
+ r+qa+d\{0,\ldots,(q/d)L-1\}.
+\]
+Lifting the signed identities slab by slab gives the assertion. This
+observation is not needed for Theorem~\ref{thm:inverse}. Nor does it
+bound the length of each progression by $|C|$: large progressions in
+a signed representation may cancel. Thus it should not be identified
+with the full signed-progression conjecture in \cite{BG}.
+\end{remark}
+
+\Needspace{7\baselineskip}
+\section{A depth-independent Sidon budget and the inverse theorem}
+\label{sec:gluing}
+
+The local covering theorems are not sufficient by themselves for an
+arbitrarily deep assembly. A multiplicative loss at every split could
+vanish along a long path. We use a weaker coefficient exponent with
+constant exactly one, and then sum over all leaves at once.
+
+\subsection{A coefficient inequality with constant one}
+
+\begin{lemma}[Constant-one Sidon aggregation]\label{lem:sidon20}
+Let $R$ be a finite additive Sidon set in the dual of a compact abelian
+group. For arbitrary complex coefficients,
+\begin{equation}\label{eq:sidon20}
+ \left\|\sum_{r\in R}a_r\chi_r\right\|_1
+ \ge\left(\sum_{r\in R}|a_r|^{20}\right)^{1/20}.
+\end{equation}
+The Haar measure is normalized. The exponent $20$ is not asserted to
+be optimal.
+\end{lemma}
+\begin{proof}
+The zero polynomial is immediate. Divide by a coefficient of maximum
+absolute value and multiply by the conjugate of its character. This
+preserves both sides up to the same factor, preserves the additive
+Sidon property, and leaves a polynomial $1+g$ whose other coefficients
+have absolute value at most one. Let their squared absolute values
+sum to $t$. The case $t=0$ is immediate, so assume $t>0$.
+
+Orthogonality and the Sidon condition give
+\begin{equation}\label{eq:sidon-moments}
+ \E g=\E g^2=0,\qquad
+ \E|g|^2=t,\qquad \E|g|^4\le2t^2.
+\end{equation}
+For example, $\E g^2=0$ follows because the sum of two nonzero shifted
+labels cannot equal the sum $0+0$ of the distinguished label. For the
+fourth moment only the two trivial pairings survive, with the all-equal
+terms counted only once. In particular, if $y=\Ima g$, then
+$\E y^2=t/2$.
+
+For every $z\in\C$ one has
+\begin{equation}\label{eq:pointwise-excess}
+ |1+z|-1-\Rea z\ge\frac{(\Ima z)^2}{2(1+|z|)}.
+\end{equation}
+When $\Ima z\ne0$, rationalize the left side and bound its denominator
+$|1+z|+1+\Rea z$ above by $2(1+|z|)$; when $\Ima z=0$, the right
+side vanishes and the inequality is automatic. Weighted
+Cauchy--Schwarz and \eqref{eq:sidon-moments} yield
+\begin{align}
+ \E|1+g|
+ &\ge1+\frac{(\E y^2)^2}{2\E[y^2(1+|g|)]}\notag\\
+ &\ge1+\frac{t}{4+8\sqrt{2t}}.
+ \label{eq:sidon-small-t}
+\end{align}
+For the second line, use
+$\E y^2|g|\le\E|g|^3\le\sqrt{\E|g|^2\E|g|^4}
+\le\sqrt2\,t^{3/2}$.
+
+If $t\le2$, \eqref{eq:sidon-small-t} is at least
+$1+t/20\ge(1+t)^{1/20}$. If $t\ge2$, apply $L^1$--$L^2$--$L^4$
+interpolation to the whole Sidon polynomial:
+\[
+ \E|1+g|\ge
+ \frac{\norm{1+g}_2^3}{\norm{1+g}_4^2}
+ \ge\sqrt{\frac{1+t}{2}}
+ \ge(1+t)^{1/20}.
+\]
+The last inequality holds for $1+t\ge3$. Finally, since each
+normalized coefficient has modulus at most one, its twentieth power
+is no larger than its square. Thus the normalized right side of
+\eqref{eq:sidon20} is at most $(1+t)^{1/20}$, proving the lemma.
+\end{proof}
+
+\begin{proposition}[Fibre and leaf budgets]\label{prop:leaf-budget}
+At any internal vertex of Definition~\ref{def:class},
+\begin{equation}\label{eq:fibre-budget}
+ \La(A_v)^{20}\ge\sum_{r\in R_v}\La(A_{v,r})^{20}.
+\end{equation}
+Consequently, for an assembly tree with leaves $A_l$,
+\begin{equation}\label{eq:leaf-budget}
+ \sum_l\La(A_l)^{20}\le\La(A)^{20}.
+\end{equation}
+If $|A|=N$ and $\La(A)\le K\log N$, then for every fixed
+$0<\theta<1$,
+\begin{align}
+ \#\{l\}&\le(K\log N)^{20},\label{eq:leaf-count}\\
+ \#\{l:|A_l|\ge N^\theta\}
+ &\le\left(\frac{K}{\cMPS\theta}\right)^{20},
+ \label{eq:large-leaf-count}\\
+ \sum_{|A_l|<N^\theta}|A_l|
+ &\le N^\theta(K\log N)^{20}=o_K(N).
+ \label{eq:small-leaf-mass}
+\end{align}
+\end{proposition}
+\begin{proof}
+Affine normalization preserves all relevant norms. For the normalized
+vertex, write $\xi=(j+x)/q_v$. At fixed $x$ its Fourier polynomial is
+\[
+ F_{A_v}((j+x)/q_v)
+ =\sum_{r\in R_v} e(rx/q_v)F_{A_{v,r}}(x)e(rj/q_v).
+\]
+Apply Lemma~\ref{lem:sidon20} on the finite cyclic group in $j$, and
+then integrate over $x\in[0,1]$. Minkowski's inequality in the finite
+space $\ell^{20}(R_v)$ gives
+\begin{align*}
+ \La(A_v)
+ &\ge\int_0^1
+       \left(\sum_r|F_{A_{v,r}}(x)|^{20}\right)^{1/20}\,dx\\
+ &\ge\left(\sum_r\La(A_{v,r})^{20}\right)^{1/20}.
+\end{align*}
+This proves \eqref{eq:fibre-budget}. Induction on the finite tree proves
+\eqref{eq:leaf-budget}, without a factor depending on its depth.
+
+Every nonempty leaf has norm at least one, proving
+\eqref{eq:leaf-count}. The weighted MPS bound gives
+$\La(A_l)\ge\cMPS\log(|A_l|+1)\ge\cMPS\theta\log N$
+for a large leaf. Substitute this in \eqref{eq:leaf-budget} to obtain
+\eqref{eq:large-leaf-count}. Finally the number of small leaves times
+$N^\theta$ bounds their total cardinality, proving
+\eqref{eq:small-leaf-mass}. Their affine images in $A$ are disjoint, so
+these cardinalities are also their actual masses in the root set.
+\end{proof}
+
+\subsection{Proof of the almost-covering theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm:inverse} for $A\in\mathfrak G_{\beta,\Delta}$]
+Let
+\[
+ B_0=\max\left\{1,\left(\frac{2K}{\cMPS}\right)^{20}\right\}.
+\]
+Use Proposition~\ref{prop:leaf-budget} with $\theta=1/2$. There are
+at most $B_0$ leaves of size at least $\sqrt N$. All other leaves
+together have size at most $\sqrt N(K\log N)^{20}$. Choose $N_0$ large
+enough that this quantity is at most $\eps N/4$ for $N\ge N_0$, and
+discard these small leaves.
+
+Among the remaining leaves discard any of size less than
+$\eps N/(4B_0)$. Since there are at most $B_0$ of them, this removes
+at most another $\eps N/4$ points. Every retained leaf has
+\begin{equation}\label{eq:retained-leaf}
+ n_l:=|A_l|\ge\frac{\eps N}{4B_0},\qquad
+ \La(A_l)\le\La(A)\le K\log N\le2K\log n_l
+\end{equation}
+for sufficiently large $N$, depending only on $K,\eps$.
+Enlarge $N_0$ also so that these leaves exceed the size thresholds in
+Theorem~\ref{thm:block-cover}. They are not singletons. Their affine
+normalizations are one of the two terminal geometries.
+
+Apply Theorem~\ref{thm:packet-cover} or
+Theorem~\ref{thm:block-cover} to each retained leaf, with norm parameter
+$2K$ and local error $\eps/2$. The sum of these local exceptional
+masses is at most $\eps N/2$. There are at most $B_0$ leaves and a
+bounded number of pieces per leaf. Each piece is a fixed
+parameter-dependent fraction of its leaf, and by
+\eqref{eq:retained-leaf} therefore a fixed fraction of $N$.
+
+Lift the pieces through the affine maps along their paths to the root.
+These maps preserve cardinality and sumset doubling. Distinct lifted
+pieces remain disjoint, because the child images partition each parent.
+The total omitted mass is at most
+$\eps N/4+\eps N/4+\eps N/2=\eps N$. This proves
+\eqref{eq:cover-conclusion}, with constants depending only on
+$K,\beta,\Delta,\eps$. The Freiman-model extension will be proved in
+Section~\ref{sec:transport}.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:main-hered}]
+Apply Theorem~\ref{thm:inverse} with error $\eps=\delta/4$. Denote its
+number of pieces by $J$ and its doubling bound by $Q$. If
+$Y\subseteq A$ has $|Y|\ge\delta N$, then at least $\delta N/2$ of
+its points lie in the pieces. Thus, for some $j$,
+$X=Y\cap B_j$ has size at least $\delta N/(2J)$. Since
+$|X+X|\le|B_j+B_j|\le QN$, \eqref{eq:energy-doubling} gives
+\[
+ E(Y)\ge E(X)\ge\frac{|X|^4}{QN}
+       \ge\frac{\delta^4}{16QJ^4}N^3
+       \ge\frac{\delta^4}{16QJ^4}|Y|^3.
+\]
+The lower bound for the constant depends only on the stated parameters.
+\end{proof}
+
+\begin{remark}[Why the hereditary formulation is natural]
+For a uniform family of sets, the almost-covering conclusion for every
+fixed $\eps>0$ is qualitatively equivalent to positive normalized
+energy for every subset of fixed positive density. One direction is
+the preceding proof. For the converse, while a remainder has at least
+$\eps N$ elements, use its energy lower bound and BSG to remove at
+least a fixed positive fraction of the original $N$. This terminates
+in boundedly many steps. No monotonicity of the Fourier $L^1$ norm under
+deletion is part of either argument.
+\end{remark}
+
+\Needspace{7\baselineskip}
+\section{High-order modelling and small exceptional perturbations}
+\label{sec:transport}
+
+An order-two Freiman isomorphism preserves additive energy and sumset
+cardinality, but does not generally preserve a Fourier $L^1$ norm.
+For the transport used here we retain sufficiently many moments. This
+also provides a bound for every corresponding subset simultaneously.
+
+\begin{definition}[Freiman isomorphism of order $h$]
+A bijection $\phi:A\to\widetilde A$ between finite subsets of abelian
+groups is a Freiman isomorphism of order $h$ if
+\[
+ a_1+\cdots+a_h=b_1+\cdots+b_h
+ \quad\Longleftrightarrow\quad
+ \phi(a_1)+\cdots+\phi(a_h)=\phi(b_1)+\cdots+\phi(b_h)
+\]
+for all choices with repetitions allowed. For nonempty sets, padding
+both sides with the same element shows that this condition also
+preserves equal-length sum relations of every order at most $h$.
+\end{definition}
+
+\begin{lemma}[Uniform transport of the norm]\label{lem:transport}
+Let $h\ge2$, and let $\phi:A\to\widetilde A$ be a Freiman isomorphism
+of order $h$. For every $C\subseteq A$, with $m=|C|$,
+\begin{equation}\label{eq:transport}
+ |\La(C)-\La(\phi(C))|\le\frac{4m}{\pi(2h+1)}.
+\end{equation}
+Here the norms are taken on the corresponding compact dual groups.
+Moreover,
+\begin{equation}\label{eq:exact-transport}
+ E(C)=E(\phi(C)),\qquad |C+C|=|\phi(C)+\phi(C)|.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The empty-set case is immediate. The relation hypothesis and
+orthogonality give
+\[
+ \int|F_C|^{2j}=\int|F_{\phi(C)}|^{2j}\qquad(1\le j\le h).
+\]
+For $-1\le t\le1$, the absolutely convergent Chebyshev expansion is
+\begin{equation}\label{eq:chebyshev}
+ |t|=\frac2\pi+\frac4\pi\sum_{k\ge1}
+       \frac{(-1)^{k+1}T_{2k}(t)}{4k^2-1}.
+\end{equation}
+One may obtain this by substituting $t=\cos\theta$ and computing the
+cosine coefficients of $|\cos\theta|$. The tail after $k=h$ is bounded
+uniformly by
+\[
+ \frac4\pi\sum_{k>h}\frac1{4k^2-1}
+ =\frac2{\pi(2h+1)},
+\]
+using the telescoping identity
+$(4k^2-1)^{-1}=\tfrac12((2k-1)^{-1}-(2k+1)^{-1})$.
+The truncation of \eqref{eq:chebyshev} is an even polynomial, hence a
+polynomial of degree $h$ in $t^2$. Apply it to $|F_C|/m$ and to
+$|F_{\phi(C)}|/m$. The integrals of all polynomial terms agree, and
+the two approximation errors together are at most
+$4/[\pi(2h+1)]$. Multiplying by $m$ proves \eqref{eq:transport}.
+The energy equality is the second moment identity above. For sumsets,
+map $a+b$ to $\phi(a)+\phi(b)$: the order-two equivalence makes this
+map well-defined and bijective, proving the other assertion.
+\end{proof}
+
+\begin{proof}[Completion of Theorem~\ref{thm:inverse} in a high-order model]
+Suppose $|A|=N\ge2$ and $\phi:A\to\widetilde A$ is an order-$N$
+Freiman isomorphism with $\widetilde A\in\mathfrak G_{\beta,\Delta}$.
+Lemma~\ref{lem:transport} gives
+\[
+ \La(\widetilde A)\le\La(A)+2/\pi
+                  \le(K+1)\log N.
+\]
+Apply the already established theorem to $\widetilde A$ with parameter
+$K+1$. Pulling the pieces back by $\phi$ preserves their cardinalities,
+disjointness, covering error, and doubling constants by
+\eqref{eq:exact-transport}. This proves the stated extension.
+\end{proof}
+
+\begin{remark}[The budget is not charged once per model change]
+If successive models all belong to the same order-$N$ relation class,
+Lemma~\ref{lem:transport} compares any two stages directly. The uniform
+error for every corresponding subset is less than $2/\pi$, regardless
+of the number of changes. This is the relevant difference from applying
+a rough norm-distortion estimate separately at each step. It does not
+assert that a geometric assembly can always be found in that relation
+class. Minimal-model arguments, such as those developed by
+Bedert~\cite{Bedert}, address the size of an integer representative;
+that is a separate issue from membership in
+$\mathfrak G_{\beta,\Delta}$.
+\end{remark}
+
+\begin{corollary}[Small exceptional perturbations]\label{cor:perturbations}
+Fix $H_0\ge0$. Suppose $|A|=N$, $\La(A)\le K\log N$, and there is
+$A_0\in\mathfrak G_{\beta,\Delta}$, or a set with a corresponding
+order-$|A_0|$ model in that class, such that
+\[
+ |A\mathbin\triangle A_0|\le H_0(\log N)^2.
+\]
+Then the conclusion of Theorem~\ref{thm:inverse} holds for $A$, with
+constants also allowed to depend on $H_0$.
+\end{corollary}
+\begin{proof}
+Put $s=|A\triangle A_0|$. The nonzero Fourier coefficients of
+$F_A-F_{A_0}$ are signs on the symmetric difference, so Parseval gives
+\[
+ |\La(A)-\La(A_0)|\le\norm{F_A-F_{A_0}}_1\le\sqrt s.
+\]
+Thus $|A_0|=N+o(N)$ and
+$\La(A_0)\le K'\log|A_0|$ for a fixed
+$K'=O(1+K+\sqrt{H_0})$. Apply Theorem~\ref{thm:inverse} to $A_0$,
+using, for example, error $\eps/4$. Intersect each resulting piece
+with $A$. At most $s=o(N)$ points are lost in total. Since the number
+of pieces is bounded and each originally has size at least $cN$,
+each intersection has at least half its former size for sufficiently
+large $N$. Its sumset cannot increase, so its doubling constant
+increases by at most a factor two. Points of $A\setminus A_0$, along
+with the original exceptional set, fit within the prescribed $\eps N$
+budget after increasing the size threshold.
+\end{proof}
+
+\Needspace{7\baselineskip}
+\section{Examples, parameter obstructions, and the general inverse problem}
+\label{sec:scope}
+
+\subsection{Interlaced progressions and the meaning of the energy exponent}
+
+The following example explains why the structural conclusion should
+not be formulated only through energetic initial segments. It is also
+a test that the assembly hypothesis alone is not already the conclusion.
+
+\begin{proposition}[Sidon fibres]\label{prop:sidon-fibres}
+For all positive integers $R,M$, there is an integer set $A$ of size
+$N=RM$ with
+\begin{equation}\label{eq:sidon-fibre-norm}
+ \La(A)\le\sqrt R\,\La(\{0,\ldots,M-1\}),
+\end{equation}
+and, for every $Y\subseteq A$,
+\begin{equation}\label{eq:sidon-fibre-energy}
+ E(Y)\le2M|Y|^2.
+\end{equation}
+Every initial segment $P\subseteq A$ with $n=|P|\ge R$ also satisfies
+\begin{equation}\label{eq:prefix-obstruction}
+ E(P)\le16n^3/R.
+\end{equation}
+The set belongs to $\mathfrak G_{\beta,\Delta}$ for every fixed
+$0<\beta\le1$, $\Delta\ge1$.
+\end{proposition}
+\begin{proof}
+Take $B=\{1,3,\ldots,3^{R-1}\}$, $q=3^R$, and
+$A=B+q\{0,\ldots,M-1\}$. The base-three expansion shows that $B$
+is Sidon as an integer set; since $q>2\max B$, it is also Sidon
+modulo $q$. In particular the displayed parametrization is disjoint.
+Writing $D_M(x)=\sum_{j=0}^{M-1}e(jx)$, finite Parseval gives, for
+fixed $x$,
+\[
+ \frac1q\sum_{j=0}^{q-1}|F_B((j+x)/q)|
+ \le\left(\frac1q\sum_{j=0}^{q-1}|F_B((j+x)/q)|^2\right)^{1/2}
+ =\sqrt R.
+\]
+Since $F_A(\theta)=F_B(\theta)D_M(q\theta)$, integration proves
+\eqref{eq:sidon-fibre-norm}.
+
+Write $Y=\bigcup_{b\in B}(b+qY_b)$, where
+$Y_b\subseteq\{0,\ldots,M-1\}$. In any additive quadruple from $Y$,
+the residue labels on the two sides pair trivially. For two fibres,
+\[
+ E(Y_b,Y_c):=\int|F_{Y_b}|^2|F_{Y_c}|^2
+ \le\min\{|Y_b|,|Y_c|\}|Y_b||Y_c|
+ \le M|Y_b||Y_c|.
+\]
+For the first inequality, use the supremum bound for one Fourier
+factor and Parseval for the other, and choose the smaller result.
+Summing over the two possible pairings of residue labels proves
+\eqref{eq:sidon-fibre-energy}; the double count when all labels agree
+only makes an upper bound larger.
+
+For an initial segment of size $n\ge R$, put $m=\lfloor n/R\rfloor$.
+All its points lie in $B+q\{0,\ldots,m\}$. There are at most $2R^2$
+ordered residue quadruples, and at most $(m+1)^3$ vertical solutions
+for each, because three vertical coordinates determine the fourth.
+As $m+1\le2n/R$, this gives \eqref{eq:prefix-obstruction}.
+Finally, the root has Sidon residue support $B$, and each child is an
+interval. Intervals are long-block terminals with $V=1$, so $A$ belongs
+to the stated class.
+\end{proof}
+
+Taking $K=C\sqrt R$ in this example and letting $M$ tend to infinity
+shows that no universal initial-segment statement can replace the
+$K^{-2}$ scale by $K^{-p}$ for a fixed $p<2$, with a positive coefficient
+independent of $K$. For fixed $\delta>0$, choose $M$ sufficiently large
+that every initial segment of size $\gg N^{1-\delta}$ has size at least
+$R$, and then let $R\to\infty$ in \eqref{eq:prefix-obstruction}.
+This is a statement about the parameter dependence of that statistic,
+not about extremizers for the sharp Littlewood constant.
+
+Indeed each individual fibre is an arithmetic progression of length
+$M=N/R$, with energy $(2M^3+M)/3$. For fixed $K$, selecting such a
+fibre already gives a linear-sized structured piece in this example.
+Conversely, \eqref{eq:sidon-fibre-energy} shows that as $R\to\infty$
+the class membership alone cannot give uniform positive-density
+small-doubling pieces: if $|Y|\ge cN$ and $|Y+Y|\le Q|Y|$, then
+\eqref{eq:energy-doubling} forces $Q\ge cR/2$. The low-$L^1$ assumption
+is therefore essential to Theorem~\ref{thm:inverse}.
+
+There is also a parameter restriction for statements that allow
+arbitrary subsets. The same example gives
+$|Y|\omega(Y)\le2N/R$. If both $K$ and $R$ grow with $N$, any proposed
+improvement must account for the corresponding size cost. This does
+not preclude a fixed-$K$ linear-sized inverse theorem, which is the
+structural direction considered here.
+
+\subsection{Depth is genuinely unbounded}
+
+Let $h,M\ge1$ and consider
+\begin{equation}\label{eq:unbalanced-example}
+ A=3^h\{0,\ldots,M-1\}\ \cup\ \{3^j:0\le j<h\}.
+\end{equation}
+Successively reducing modulo $3$ gives a chain of $h$ Sidon splits
+with residue support $\{0,1\}\subset\Z/3\Z$. At each step there is
+one continuing child and one singleton. The terminal continuing set
+is an interval. On the other hand, the triangle inequality and Parseval
+give
+\[
+ \La(A)\le\La(\{0,\ldots,M-1\})+\sqrt h.
+\]
+For $h=\lfloor(\log M)^2\rfloor$, this is $O(\log|A|)$ while the
+depth tends to infinity. A per-step multiplicative loss would not
+suffice for this family. Proposition~\ref{prop:leaf-budget} has no such
+loss.
+
+For comparison, the fully branching ternary digit set
+\[
+ \left\{\sum_{j=0}^{h-1}\epsilon_j3^j:\epsilon_j\in\{0,1\}\right\}
+\]
+has $2^h$ singleton leaves in a Sidon tree. The leaf budget implies
+$\La(A)\ge|A|^{1/20}$, incompatible with $K\log|A|$ for large $|A|$
+and fixed $K$. Thus the same estimate distinguishes many macroscopic
+independent branches from a long chain with only small exceptional
+branches.
+
+\subsection{What the proof does not supply}
+
+The missing step for an unrestricted inverse theorem is not part of
+BSG, the majority calculation, or the leaf budget. It is a theorem
+placing arbitrary low-$L^1$ sets, or suitable high-order equivalent
+models, into a usable assembly. Non-Sidon quotient supports need not
+be dense separated blocks or long arithmetic inflations. The absence
+of a Sidon split is not a classification of a general integer set.
+
+A related difficulty is the difference between localizing a test
+function and localizing the target. The kernel $V_D$ in
+Lemma~\ref{lem:band} has $2D+1$ Fourier coefficients equal to one but
+$\norm{V_D}_1\le3$, because its other coefficients form fractional
+slopes. Thus retaining many unit coefficients in a smooth projection
+does not justify replacing that projection by an integer indicator
+with comparable norm. All target sets in the local theorems above
+are actual integer sets, and all residue supports at internal vertices
+are the full supports. These requirements are used explicitly.
+
+A natural unrestricted target would assert
+\eqref{eq:cover-conclusion} for every $A$ with
+$\La(A)\le K\log N$. It would imply a linear-sized small-doubling
+subset and positive normalized energy for every macroscopic subset.
+The signed-progression conjecture formulated in \cite[Section 6]{BG}
+asks for a still more specific representation, with boundedly many
+progressions and a sublinear exceptional set. Neither general statement
+is proved here. The present theorem isolates local mechanisms that
+are compatible with arbitrarily deep independent assemblies, and
+makes their exact entry hypotheses explicit.
+
+\appendix
+
+\Needspace{7\baselineskip}
+\section{An exact certificate for the numerical coefficient}
+\label{app:certificate}
+
+This appendix specifies a finite rational computation certifying the
+decimal in Theorem~\ref{thm:constant}. Decimal evaluations are used only
+for presentation. Every inequality required by the certificate is an
+inequality between rational numbers, or follows from squaring two
+nonnegative rational bounds.
+
+The even moments $I_{2r}$ are given exactly by
+\eqref{eq:even-sinc-formula}. For the odd coefficients, choose an upper
+rational square-root bound as follows. If $x\ge0$ is rational, let
+\[
+ U_d(x)=\frac{\left\lfloor10^d\sqrt{x}\right\rfloor+1}{10^d}.
+\]
+The integer in this definition is computed by integer square root after
+clearing denominators. Then $\sqrt x<U_d(x)$, with an error at most
+$10^{-d}$. Set $\overline c_{2r}=I_{2r}$ and
+$\overline c_{2r+1}=U_{40}(I_{2r}I_{2r+2})$.
+Using $c_k\le1$, for any $L\ge5$ one has
+\begin{equation}\label{eq:series-certificate}
+ \sum_{k\ge5}\frac{c_ka^k}{k}
+ \le\sum_{k=5}^L\frac{\overline c_ka^k}{k}
+        +\frac{a^{L+1}}{(L+1)(1-a)}.
+\end{equation}
+We use $L=160$ and $a=9/10$.
+
+Logarithms are bounded by their elementary positive series. For a
+rational $x>1$, write $z=(x-1)/(x+1)$ and
+\[
+ \ell_J(x)=2\sum_{j=0}^{J-1}\frac{z^{2j+1}}{2j+1}.
+\]
+Then
+\begin{equation}\label{eq:log-certificate}
+ \ell_J(x)<\log x
+ <\ell_J(x)+\frac{2z^{2J+1}}{(2J+1)(1-z^2)}.
+\end{equation}
+The certificate takes $J=240$ for $x=9,10$. These estimates follow by
+integrating the geometric series for $(1-z^2)^{-1}$ and bounding each
+tail denominator below by $2J+1$.
+
+Substituting \eqref{eq:series-certificate} into \eqref{eq:E-intro},
+with all square roots rounded upwards, gives a rational number
+$\overline{\mathcal E}$ satisfying
+\begin{equation}\label{eq:E-certified}
+ \mathcal E_{9/10}\le\overline{\mathcal E}
+ <\frac{479084457020255861}{10^{18}}.
+\end{equation}
+The series remainder in \eqref{eq:series-certificate} is less than
+$2.668198549256\cdot10^{-9}$. Its contribution to
+$\overline{\mathcal E}$ is multiplied by $2/9$.
+Let $\overline L_9$ be the upper bound for $\log9$ in
+\eqref{eq:log-certificate}, and let
+$\overline R=U_{40}(\overline{\mathcal E}/3)$. Then
+\begin{equation}\label{eq:c-certified}
+ c_*\ge\frac{9}{10\overline L_9}(1-\overline R)
+ >\frac{2459209213577253}{10^{16}}>0.2459209.
+\end{equation}
+The last inequality is checked by integer cross-multiplication; its
+numerator $1-\overline R$ is positive. The same logarithmic enclosure
+verifies that \eqref{eq:Phi-endpoints} at $b=11/8$ is negative, with
+an upper bound less than $-1.1121923140$.
+
+The companion file \texttt{verify\_constant.py} implements these steps
+using integer arithmetic, rational fractions, and integer square roots.
+Its printed decimal strings are not inputs to the certificate. The
+source and the certified rational procedure are supplied to make the
+explicit constant reproducible, rather than to replace the analytical
+argument preceding this appendix.
+
+\section{The one-sided endpoint barrier and a two-sided interval model}
+\label{app:landau}
+
+This appendix distinguishes the sharp Littlewood constant from the
+best value obtainable in the final spectral class of the outer
+recursion. The upper bound below is the classical Landau inequality;
+see \cite{LandauAsymptotics,Kovalev}. We include its short proof to make
+the limitation of the method precise.
+
+\begin{proposition}[Landau's bound in the relevant spectral class]
+\label{prop:landau}
+Let $D_N(z)=1+z+\cdots+z^{N-1}$ on the unit circle. If
+$\norm G_\infty\le1$ and $\supp\widehat G\subseteq(-\infty,N-1]\cap\Z$,
+then
+\begin{equation}\label{eq:landau}
+ |\ip{D_N}G|\le
+ \sum_{k=0}^{N-1}\left(\frac{\binom{2k}{k}}{4^k}\right)^2
+ =\frac1\pi\log N+O(1).
+\end{equation}
+The inequality is sharp within this class of tests.
+\end{proposition}
+\begin{proof}
+Put $m=N-1$, $b_k=\binom{2k}{k}/4^k$, and
+$Q_m(z)=\sum_{k=0}^m b_kz^k$. Since the $b_k$ are the coefficients of
+$(1-z)^{-1/2}$,
+\[
+ Q_m(z)^2=1+z+\cdots+z^m+O(z^{m+1}).
+\]
+The boundary function $h=z^m\overline G$ is analytic and bounded by
+one in the disc. If $h_k$ are its Taylor coefficients, then
+\[
+ \ip{D_N}G=\sum_{k=0}^m h_k=[z^m](hQ_m^2).
+\]
+Taking this coefficient on the unit circle gives
+\[
+ |[z^m](hQ_m^2)|\le\int_\T|Q_m|^2=\sum_{k=0}^m b_k^2.
+\]
+Stirling's formula gives $b_k^2=1/(\pi k)+O(k^{-2})$ for $k\ge1$,
+proving the asymptotic.
+
+For sharpness, $Q_m$ has no zeros in the closed disc. This is immediate
+for $m=0$. For $m\ge1$, the identity
+\[
+ (1-z)Q_m(z)=1-\sum_{k=1}^m(b_{k-1}-b_k)z^k-b_mz^{m+1}
+\]
+has positive subtracted coefficients summing to one. Their sum has
+modulus strictly less than one when $|z|<1$. Equality on the unit
+circle can produce a zero of the right side only at $z=1$, since the
+coefficient of $z$ is positive; but $Q_m(1)>0$. Thus
+$h=z^m\overline{Q_m}/Q_m$, with the numerator interpreted as the
+reversed polynomial, is analytic and has unit boundary modulus. It
+attains the bound, since
+$hQ_m^2=z^m|Q_m|^2$ on the circle. The corresponding test is
+$G=Q_m/\overline{Q_m}$.
+\end{proof}
+
+For an interval, every test produced in \eqref{eq:test-function} has
+Fourier support at most $N-1$. Consequently modifying source phases,
+scale choices, or multiplier estimates while retaining that final
+support restriction cannot prove a coefficient greater than $1/\pi$.
+This is not an upper bound for the actual Littlewood constant, and it
+does not prohibit using one-sided tests as inputs to a nonlinear
+construction with two-sided spectrum.
+
+\begin{proposition}[Two-sided completion on an interval]
+\label{prop:interval-completion}
+With $Q_{N-1}$ as above, put
+\[
+ U_N=\frac{Q_{N-1}}{\overline{Q_{N-1}}},\qquad
+ V_N=z^{N-1}\overline{U_N},\qquad
+ H_N=\frac{U_N+V_N}{|U_N+V_N|},
+\]
+where $H_N=0$ at zeros of its denominator. Then $|H_N|\le1$ and
+\begin{equation}\label{eq:interval-completion}
+ \Rea\ip{D_N}{H_N}\ge\norm{D_N}_1-O(1)
+ =\frac4{\pi^2}\log N+O(1).
+\end{equation}
+\end{proposition}
+\begin{proof}
+In this proof write $z=e^{it}$ with $0<t<2\pi$; circle integrals carry
+measure $dt/(2\pi)$. Define
+\[
+ U_\infty(t)=ie^{-it/2},\qquad
+ V_\infty(t)=-ie^{i(N-1/2)t}.
+\]
+The identity
+\begin{equation}\label{eq:interval-phase-identity}
+ U_\infty(t)+V_\infty(t)=2\sin(t/2)D_N(e^{it})
+\end{equation}
+shows that the phase of this sum equals the phase of $D_N$. These are
+boundary phase models, not assertions about their one-sided Fourier
+support.
+
+Abel summation applied to the decreasing coefficients $b_k$ gives,
+on the unit circle away from $1$,
+\[
+ |Q_{N-1}(z)-(1-z)^{-1/2}|
+ \le C N^{-1/2}|1-z|^{-1}.
+\]
+For example the tail of $\sum_{k\ge N}b_kz^k$ is bounded by a
+constant times $b_N/|1-z|$ by summation by parts. Since
+$|(1-z)^{-1/2}|=|1-z|^{-1/2}$, normalization of complex numbers implies,
+with $s=\min(t,2\pi-t)$,
+\begin{equation}\label{eq:phase-error}
+ |U_N-U_\infty|+|V_N-V_\infty|
+ \le C\min\{1,(Ns)^{-1/2}\}.
+\end{equation}
+Here the phase of $(1-e^{it})^{-1/2}$ divided by its conjugate is
+exactly $ie^{-it/2}$.
+
+On the arcs $s\le1/N$, use $|D_N|\le N$ and the trivial bound two
+for the difference of normalized phases. The weighted error integral
+is $O(1)$. Outside these arcs, use
+\[
+ \left|\frac X{|X|}-\frac Y{|Y|}\right|
+ \le\frac{2|X-Y|}{|Y|},\qquad
+ \frac{|D_N|}{|U_\infty+V_\infty|}
+ =\frac1{2\sin(t/2)}.
+\]
+At zeros the inequality is interpreted by an arbitrary unit-bounded
+value, and the exceptional finite set has measure zero. Combining
+with \eqref{eq:phase-error}, the remaining weighted error is at most
+\[
+ C N^{-1/2}\int_{1/N}^\pi s^{-3/2}\,ds=O(1).
+\]
+This proves the first inequality in \eqref{eq:interval-completion};
+the second is \eqref{eq:ap-asymptotic}.
+\end{proof}
+
+For a general frequency set, nonlinear phase completion introduces
+mixed products such as $U^2\overline V$ and $V^2\overline U$ in the
+pairing. Opposite one-sided Fourier supports alone do not eliminate
+these terms or control their signs. Proposition~\ref{prop:interval-completion}
+is an interval model, not a proof of the sharp coefficient for arbitrary
+sets.
+
+\section*{Computational reproducibility}
+The explicit decimal is certified by the rational procedure in
+Appendix~\ref{app:certificate}; accompanying finite checks of the
+moment and Sidon identities are supplementary tests, not substitutes
+for the proofs.
+
+\section*{Statement on the use of AI}
+Generative AI tools were used substantially during exploratory work and
+in preparing the manuscript, including the development and checking of
+arguments, calculations, exposition, and \LaTeX{} and code preparation.
+The author is responsible for checking every argument and for the
+mathematical content of any submitted version.
+
+\begin{thebibliography}{99}
+
+\bibitem{Bedert}
+B. Bedert, \emph{Large sum-free subsets of sets of integers via
+$L^1$-estimates for trigonometric series}, preprint (2025),
+\arxiv{2502.08624}.
+
+\bibitem{BG}
+T. F. Bloom and B. Green, \emph{Remarks on the inverse Littlewood
+conjecture}, Q. J. Math. (2026), article haag016,
+\doi{10.1093/qmath/haag016}; \arxiv{2602.16482v2}
+(revised April 18, 2026).
+
+\bibitem{Bourgain}
+J. Bourgain, \emph{Estimates related to sumfree subsets of sets of
+integers}, Israel J. Math. \textbf{97} (1997), 71--92.
+
+\bibitem{BTK}
+N. G. de Bruijn, C. van Ebbenhorst Tengbergen, and D. Kruyswijk,
+\emph{On the set of divisors of a number}, Nieuw Arch. Wisk. (2)
+\textbf{23} (1951), 191--193.
+
+\bibitem{Duren}
+P. L. Duren, \emph{Theory of $H^p$ Spaces}, Pure and Applied Mathematics,
+vol.~38, Academic Press, New York--London, 1970.
+
+\bibitem{Fournier}
+J. J. F. Fournier, \emph{Some remarks on the recent proofs of the
+Littlewood conjecture}, in \emph{Second Edmonton Conference on
+Approximation Theory} (Edmonton, Alta., 1982), CMS Conf. Proc.,
+vol.~3, American Mathematical Society, Providence, RI, 1983,
+157--170.
+
+\bibitem{Gabriel}
+R. M. Gabriel, \emph{The rearrangement of positive Fourier coefficients},
+Proc. London Math. Soc. (2) \textbf{33} (1932), 32--51,
+\doi{10.1112/plms/s2-33.1.32}.
+
+\bibitem{GreenSanders}
+B. Green and T. Sanders, \emph{A quantitative version of the idempotent
+theorem in harmonic analysis}, Ann. of Math. (2) \textbf{168} (2008),
+no.~3, 1025--1054, \doi{10.4007/annals.2008.168.1025}.
+
+\bibitem{Hanson}
+B. Hanson, \emph{Littlewood's problem for sets with multidimensional
+structure}, Int. Math. Res. Not. IMRN \textbf{2021} (2021), no.~21,
+16736--16750, \doi{10.1093/imrn/rnaa043}; \arxiv{2003.01561}.
+
+\bibitem{HardyLittlewood}
+G. H. Hardy and J. E. Littlewood, \emph{A new proof of a theorem on
+rearrangements}, J. London Math. Soc. \textbf{23} (1948), 163--168.
+
+\bibitem{Konyagin}
+S. V. Konyagin, \emph{On the Littlewood problem}, Izv. Akad. Nauk SSSR
+Ser. Mat. \textbf{45} (1981), no.~2, 243--265, 463; English translation,
+Math. USSR-Izv. \textbf{18} (1982), no.~2, 205--225.
+
+\bibitem{Kovalev}
+L. V. Kovalev, \emph{Sharp bounds for some segments of bounded power
+series}, preprint (2025), \arxiv{2507.04544}.
+
+\bibitem{LandauAsymptotics}
+Y. Li, S. Liu, S. Xu, and Y. Zhao, \emph{Asymptotics of Landau constants
+with optimal error bounds}, Constr. Approx. \textbf{40} (2014),
+281--305, \doi{10.1007/s00365-014-9259-x}.
+
+\bibitem{MPS}
+O. C. McGehee, L. Pigno, and B. Smith, \emph{Hardy's inequality and the
+$L^1$ norm of exponential sums}, Ann. of Math. (2) \textbf{113} (1981),
+no.~3, 613--618, \doi{10.2307/2007000}.
+
+\bibitem{Petridis}
+G. Petridis, \emph{The $L^1$-norm of exponential sums in $\Z^d$},
+Math. Proc. Cambridge Philos. Soc. \textbf{154} (2013), no.~3,
+381--392, \doi{10.1017/S0305004112000588}.
+
+\bibitem{Pichorides}
+S. K. Pichorides, \emph{On the $L^1$ norm of exponential sums},
+Ann. Inst. Fourier (Grenoble) \textbf{30} (1980), no.~2, 79--89,
+\doi{10.5802/aif.785}.
+
+\bibitem{ReiherSchoen}
+C. Reiher and T. Schoen, \emph{Note on the theorem of Balog,
+Szemer\'edi, and Gowers}, Combinatorica \textbf{44} (2024), no.~3,
+691--698, \doi{10.1007/s00493-024-00092-5}; \arxiv{2308.10245v2}.
+
+\bibitem{Stegeman}
+J. D. Stegeman, \emph{On the constant in the Littlewood problem},
+Math. Ann. \textbf{261} (1982), no.~1, 51--54,
+\doi{10.1007/BF01456409}.
+
+\bibitem{TaoVu}
+T. Tao and V. H. Vu, \emph{Additive Combinatorics}, Cambridge Studies
+in Advanced Mathematics, vol.~105, Cambridge University Press,
+Cambridge, 2006, \doi{10.1017/CBO9780511755149}.
+
+\bibitem{Yabuta}
+K. Yabuta, \emph{A remark on the Littlewood conjecture}, Bull. Fac.
+Sci. Ibaraki Univ. Ser. A \textbf{14} (1982), 19--21,
+\doi{10.5036/bfsiu1968.14.19}.
+
+\bibitem{Zygmund}
+A. Zygmund, \emph{Trigonometric Series}, Vols.~I and II, third edition,
+Cambridge Mathematical Library, Cambridge University Press,
+Cambridge, 2002.
+
+\end{thebibliography}
+\end{document}
