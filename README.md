@@ -1,6 +1,6 @@
-# An improved Littlewood constant and structural inverse theorems
+# Further remarks on the inverse Littlewood conjecture
 
-Lean 4 formalization of *An improved Littlewood constant and structural inverse theorems*. The development covers the two main theorems, their supporting results, applications and examples, and both appendices.
+Lean 4 formalization of *Further remarks on the inverse Littlewood conjecture*. The development covers the two main theorems, their supporting results, applications and examples, and both appendices.
 
 The project uses **Lean 4.32.0** and **mathlib v4.32.0**. Seven external mathematical results are explicitly declared as Lean axioms; their statements, sources, and uses are documented below. The internal proofs contain no `sorry`, `admit`, or `native_decide`.
 
@@ -10,7 +10,7 @@ The project uses **Lean 4.32.0** and **mathlib v4.32.0**. Seven external mathema
 - [Reference manuscript PDF](manuscript/Littlewood_constant_inverse.pdf)
 - [Reference manuscript LaTeX](manuscript/Littlewood_constant_inverse.tex)
 
-The revised source contains presentation and contact-information updates. The reference snapshot dated 2026-09-06 is preserved for the proof-coverage map and archived manuscript checksums; the mathematical statements and proofs are unchanged.
+The revised source contains title, presentation, and contact-information updates. The reference snapshot dated 2026-09-06 is preserved for the proof-coverage map and archived manuscript checksums; the mathematical statements and proofs are unchanged.
 
 ## Main results and entry points
 

@@ -15,4 +15,4 @@ The public README was rewritten, the root package name in `lake-manifest.json` w
 
 ## Manuscript presentation update
 
-The revised source prepared for arXiv is included as `manuscript/Littlewood_constant_inverse_arxiv.tex`. It updates the abstract, typography, AI statement, affiliation, and contact details. The original manuscript PDF and TeX remain the reference snapshot for the archived verification records; the mathematical statements and proofs are unchanged.
+The revised source prepared for arXiv is included as `manuscript/Littlewood_constant_inverse_arxiv.tex`. It updates the title, abstract, typography, AI statement, affiliation, and contact details. The original manuscript PDF and TeX remain the reference snapshot for the archived verification records; the mathematical statements and proofs are unchanged.
